@@ -168,4 +168,34 @@
     <?php include("map_districts_coordinates.php"); ?>
 
   );
+
+  // source: https://github.com/Leaflet/Leaflet/issues/2896
+  /*HGH LATITUDE POPUPS OPENING DOWNWARD instead of UPWARD - prevent yoyo effect*/
+  map.on('popupopen', function(e) {
+
+    // saving old anchor point X Y
+    if (!e.popup.options.oldOffset) e.popup.options.oldOffset = e.popup.options.offset;
+    var px = map.project(e.popup._latlng);
+    // we calculate popup content height (jQuery)
+    var heightOpeningPopup = $('#map').find('.leaflet-popup-content').height();
+    var temp = px.y - heightOpeningPopup;
+    console.log(temp)
+    var temp2 = heightOpeningPopup + 58.5;
+    if (temp < 22800) { // if it will go above the world, we prevent it to do so
+      // we make the popup go below the poi instead of above
+      e.popup.options.offset = new L.Point(6, temp2);
+      // we make the popup tip to be pointing upward (jQuery)
+      $('#map').addClass("reverse-popup");
+      e.popup.update();
+    } else { // we allow auto pan if the popup can open in the normal upward way
+      e.popup.options.offset = e.popup.options.oldOffset;
+      e.popup.options.autoPan = true;
+      $('#map').removeClass("reverse-popup");
+      e.popup.update();
+    }
+  });
+
+  map.on('popupclose', function(e) {
+    e.popup.options.autoPan = false;
+  });
 </script>

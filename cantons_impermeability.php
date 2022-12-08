@@ -35,6 +35,42 @@ include("map_components/map_head.php");
 
     return value;
   }
+
+  function get_impermeable(feature) {
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+    id += 1;
+
+    //getting the canton name with the id
+    canton = indexes["Canton"][id];
+    //getting the value with the canton name
+    value = Number(data[">>10.11 Befestigte Flächen 2013/18"]["- " + canton]) + Number(data[">>10.12 Gebäude 2013/18"]["- " + canton]) + Number(data[">>10.13 Treibhäuser 2013/18"]["- " + canton]) + Number(data[">>10.17 Gemischte Kleinstrukturen 2013/18"]["- " + canton]);
+    value = Math.round(value * 100) / 100;
+
+    return value;
+  }
+
+  function get_total(feature) {
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+    id += 1;
+
+    //getting the canton name with the id
+    canton = indexes["Canton"][id];
+    //getting the value with the canton name
+    value = Number(data["Fläche - Total 2013/18"]["- " + canton]);
+    value = Math.round(value * 100) / 100;
+
+    return value;
+  }
 </script>
 
 <?php include("map_components/cantons_map_init.php"); ?>
@@ -97,12 +133,9 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["Canton:", "(TEMPORARY) id:"];
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value =
-        "<br><popuptext>In " +
-        get_name(current_tile) +
-        " " +
-        get_value(current_tile) +
-        "% of the total area is artificially impermeable</popuptext><br>";
+      let value = "<br><popuptext>In 2021 the area which was artificially impermeable was " + get_impermeable(current_tile) + " ha.<br> The total area is " + get_total(current_tile)+ 
+      " ha.<br><br><strong>Therefore, " + get_value(current_tile) +
+        "% of the total area of " + get_name(current_tile) + " in 2021 was artificially impermeable.</strong></popuptext><br>";
       div.innerHTML = title + value + detailsButton;
       return div;
     }, {

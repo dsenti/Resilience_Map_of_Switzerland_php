@@ -35,9 +35,45 @@ include("map_components/map_head.php");
 
     return value;
   }
+
+  function get_total(feature) {
+
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+
+    //getting the district name with the id
+    district = indexes["District"][id];
+    //getting the district average farm size (dafs) with the district name
+    value = Number(data["Fläche - Total 2013/18"][district]);
+    value = (Math.round(value * 100) / 100)
+
+    return value;
+  }
+
+  function get_impermeable(feature) {
+
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+
+    //getting the district name with the id
+    district = indexes["District"][id];
+    //getting the district average farm size (dafs) with the district name
+    value = Number(data[">>10.11 Befestigte Flächen 2013/18"][district]) + Number(data[">>10.12 Gebäude 2013/18"][ district]) + Number(data[">>10.13 Treibhäuser 2013/18"][ district]) + Number(data[">>10.17 Gemischte Kleinstrukturen 2013/18"][ district]);
+    value = (Math.round(value * 100) / 100);
+
+    return value;
+  }
 </script>
 
-<?php include("map_components/districts_map_init.php"); ?>
+<?php include("map_components/districts_map_init.php"); ?>;
 
 <script>
   geo_json_8a893a869ac36e93724032a2dd24d64c.bindTooltip(
@@ -78,13 +114,12 @@ include("map_components/map_head.php");
 </script>
 
 <!-- IFRAME STUFF: -->
-<!-- defining the iframe as detailsCantons.html (done in views) -->
+<!-- defining the iframe as detailsdistricts.html (done in views) -->
 <iframe class="detailsIframe" id="detailsIframe" src="details_page/details_districts.php" title="Details" frameborder="0"></iframe>
 
 <?php include("map_components/details_iframe.php"); ?>
 
 <script>
-
   //this function is responsible for creating the popup when clicking on a tile
   geo_json_8a893a869ac36e93724032a2dd24d64c.bindPopup(
     function(layer) {
@@ -100,12 +135,11 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["District:", "(TEMPORARY) id:"];
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value = "<br><popuptext>In '" + get_name(current_tile) + "' " + get_value(current_tile) + "% of the total area is artificially valueermeable</popuptext><br>";
+      let value = "<br><popuptext>In 2021 the area which was artificially impermeable was " + get_impermeable(current_tile) + " ha.<br> The total area is " + get_total(current_tile)+ " ha.<br><br><strong>Therefore, " + get_value(current_tile) +"% of the total area of " + get_name(current_tile) + " in 2021 was artificially impermeable.</strong></popuptext><br>";
       div.innerHTML = title + value + detailsButton;
       return div;
     }, {
       className: "foliumpopup"
     }
   )
-
 </script>

@@ -6,7 +6,7 @@ include("map_components/map_head.php");
     //this is the color of the map!!
     var color = "#0033a9";
     min = 0;
-    max = 35;
+    max = 1.1;
 
     //creating legend of map
     document.getElementById("legend_max").innerHTML = max + "%";
@@ -14,7 +14,7 @@ include("map_components/map_head.php");
 
     function get_data() {
         //the json files which were generated in create_data
-        var raw_data = <?php include('data/data_cantons_artificialization.php'); ?>
+        var raw_data = <?php include('data/data_cantons_artificialization.php'); ?>;
         return JSON.parse(raw_data);
     }
 
@@ -32,6 +32,63 @@ include("map_components/map_head.php");
         canton = indexes["Canton"][id];
         //getting the cantonal soil artificialization (value) with the canton name
         value = Number(data["increase in artificial land"]["- " + canton]);
+        value = Math.round(value * 100) / 100;
+
+        return value;
+    }
+
+    function get_artificial2018(feature) {
+
+        //getting the data
+        var data = get_data();
+        var indexes = get_indexes();
+
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
+
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the (value) with the canton name
+        value = Number(data["-10 Künstlich angelegte Flächen 2013/18"]["- " + canton]);
+        value = Math.round(value * 100) / 100;
+
+        return value;
+    }
+
+    function get_artificial2009(feature) {
+
+        //getting the data
+        var data = get_data();
+        var indexes = get_indexes();
+
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
+
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the (value) with the canton name
+        value = Number(data["-10 Künstlich angelegte Flächen 2004/09"]["- " + canton]);
+        value = Math.round(value * 100) / 100;
+
+        return value;
+    }
+
+    function get_area(feature) {
+
+        //getting the data
+        var data = get_data();
+        var indexes = get_indexes();
+
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
+
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the (value) with the canton name
+        value = Number(data["Fläche - Total 2013/18"]["- " + canton]);
         value = Math.round(value * 100) / 100;
 
         return value;
@@ -100,13 +157,11 @@ include("map_components/map_head.php");
             let fields = ["name", "id"];
             let aliases = ["Canton:", "(TEMPORARY) id:"];
             let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-            let value =
-                "<br><popuptext>In " +
-                get_name(current_tile) +
-                " there is " +
-                get_value(current_tile) +
-                "% more artificial area than 20 years ago.</popuptext><br>";
-            div.innerHTML = title + value + detailsButton;
+            let art2009 = "<br><popuptext>In 2009 there were " + get_artificial2009(current_tile) + " ha of artificial area.</popuptext>";
+            let art2018 = "<br><popuptext>In 2018 there were " + get_artificial2018(current_tile) + " ha of artificial area.</popuptext>";
+            let total = "<br><popuptext>The total area is " + get_area(current_tile) + " ha.</popuptext>";
+            let value = "<br><br><popuptext><strong>In " + get_name(current_tile) + ", " + get_value(current_tile) + "% of the total area has been artificialized between 2009 and 2018.</strong></popuptext><br>";
+            div.innerHTML = title + art2009 + art2018 + total + value + detailsButton;
             return div;
         }, {
             className: "foliumpopup"

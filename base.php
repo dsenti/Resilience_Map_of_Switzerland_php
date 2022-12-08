@@ -6,7 +6,7 @@
   <link rel= "stylesheet" href= "/static/style.php">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <div class="topnav">
+    <div class="topnav" id = "topnav">
       <a class="nav-item" id="home_tab" href="/home.php">Home</a>
       <a class="nav-item" id="tab_CAFS" href="/cantons_average_farm_size.php">Average Farm Size</a>
       <a class="nav-item" id="tab_artificialization" href="/cantons_soil_artificialization.php">Soil Artificialization</a>

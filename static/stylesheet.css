@@ -6,9 +6,9 @@ body {
   padding: 0;
 }
 
-body{
+body {
   background-color: transparent;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: black;
   width: 100%;
@@ -18,9 +18,9 @@ body{
   z-index: -3;
 }
 
-iframebody{
+iframebody {
   background-color: transparent;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: black;
   width: 100%;
@@ -31,16 +31,16 @@ iframebody{
 }
 
 h1 {
-    margin-top: -40px;
-    position: relative;
-    text-align: center;
-  }
-  h2 {
-    margin-top: -20px;
-    position: relative;
-    text-align: center;
-    font-size: medium;
-  }
+  margin-top: -40px;
+  position: relative;
+  text-align: center;
+}
+h2 {
+  margin-top: -20px;
+  position: relative;
+  text-align: center;
+  font-size: medium;
+}
 p {
   padding-left: 15%;
   padding-right: 15%;
@@ -50,183 +50,189 @@ p {
 /* -------------------------------------------- */
 /* navigation bar */
 .topnav {
-    width: 100%;
-    overflow: hidden;
-    text-align: center;
-    font-size: 16px;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    backdrop-filter: grayscale(30%) blur(20px);
-    z-index: 1;
-  }
-
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 16px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  backdrop-filter: grayscale(30%) blur(20px);
+  -webkit-backdrop-filter: grayscale(30%) blur(20px);
+  z-index: 1;
+}
 
 .nav-item {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    /* display: block; */
-    color: black;
-    /* text-align: center; */
-    text-decoration: none;
-    /* display: inline; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* display: block; */
+  color: black;
+  /* text-align: center; */
+  text-decoration: none;
+  /* display: inline; */
+}
 
-  }
-
-  .nav-item:hover{
-    background-color: rgb(54, 54, 54);
-    color: white;
-    border-radius: 5px;
-   }
+.nav-item:hover {
+  background-color: rgb(54, 54, 54);
+  color: white;
+  border-radius: 5px;
+}
 
 /* -------------------------------------------- */
-   /* buttons to change between maps */
-  .map-option{
-    position: absolute;
-    margin-left: 3%;
-    top: 30%;
-    z-index: 0;
-    font-size: 14px;
-  }
+/* buttons to change between maps */
+.map-option {
+  position: absolute;
+  margin-left: 3%;
+  top: 30%;
+  z-index: 0;
+  font-size: 14px;
+}
 
-  .option-item{
-    display: block;
-    width: 90px;
-    height: 20px;
-    margin-top: 15px;
-    padding-top: 4px;
-    color: rgb(73, 73, 73);
-    border:2px solid rgb(204, 204, 204);
-    border-radius: 5px;
-    text-align: center;
-    backdrop-filter:  blur(8px) brightness(150%) grayscale(70%);
-    text-decoration: none;
-  }
+.option-item {
+  display: block;
+  width: 90px;
+  height: 20px;
+  margin-top: 15px;
+  padding-top: 4px;
+  color: rgb(73, 73, 73);
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 5px;
+  text-align: center;
+  backdrop-filter: blur(8px) brightness(150%) grayscale(70%);
+  -webkit-backdrop-filter: blur(8px) brightness(150%) grayscale(70%);
+  text-decoration: none;
+}
 
+.option-item:hover {
+  background-color: rgb(54, 54, 54);
+  color: white;
+  border-color: rgb(54, 54, 54);
+}
 
-
-  .option-item:hover{
-    background-color: rgb(54, 54, 54);
-    color: white;
-    border-color: rgb(54,54,54);
-  }
-
-  /* ____________________________________________
+/* ____________________________________________
   legend */
 
-  .legend{
-    position: absolute;
-    width: 250px;
-    height: 10px;
-    margin-left: 105px;
-    bottom: 2%;
-    z-index: 0;
-    font-size: 14px;
-    background-image: linear-gradient(to right, white, black);
-  }
-  .legend_min{ 
-    position: absolute;
-    margin-left: 70px;
-    bottom: 1.7%;
-    z-index: 0;
-    font-size: 12px;
-  }
+.legend {
+  position: absolute;
+  width: 250px;
+  height: 10px;
+  margin-left: 105px;
+  bottom: 2%;
+  z-index: 0;
+  font-size: 14px;
+  background-image: linear-gradient(to right, white, black);
+}
+.legend_min {
+  position: absolute;
+  margin-left: 70px;
+  bottom: 1.7%;
+  z-index: 0;
+  font-size: 12px;
+}
 
-  .legend_max{
-    position: absolute;
-    margin-left: 362px;
-    bottom: 1.7%;
-    z-index: 0;
-    font-size: 12px;
-  }
+.legend_max {
+  position: absolute;
+  margin-left: 362px;
+  bottom: 1.7%;
+  z-index: 0;
+  font-size: 12px;
+}
 
-  .legend_background{
-    position: absolute;
-    width: 340px;
-    height: 30px;
-    margin-left: 60px;
-    bottom: 0.7%;
-    z-index: -1;
-    border-radius: 5px;
-    background-color: transparent;
-    backdrop-filter: blur(20px);
-  }
+.legend_background {
+  position: absolute;
+  width: 340px;
+  height: 30px;
+  margin-left: 60px;
+  bottom: 0.7%;
+  z-index: -1;
+  border-radius: 5px;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 
-    /* __________________________________________ */
-    /* Details window (iframe) */
+/* __________________________________________ */
+/* Details window (iframe) */
 
-    #detailsIframe{
-      padding: 2%;
-      /* padding-right: 0.3%; */
-      position: absolute;
-      margin-left: 65%;
-      margin-top: 1%;
-      width: 30%;
-      color: rgb(204,204,204);
-      height: 70%;
-      
-      backdrop-filter: blur(23px) brightness(100%) saturate(80%);
-      border-radius: 16px;
-      /* visibility : "hidden"; */
-    }
+#detailsIframe {
+  padding: 2%;
+  /* padding-right: 0.3%; */
+  position: absolute;
+  margin-left: 65%;
+  margin-top: 1%;
+  width: 30%;
+  color: rgb(204, 204, 204);
+  height: 70%;
 
-    #title{
-      color: black;
-    }
-  
-    #detailsButton{
-    background-color: transparent;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 11px;
-    color: rgb(73, 73, 73);
-    border:2px solid rgb(204, 204, 204);
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 3px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    }
-  
-    #detailsButton:hover{
-      background-color: rgb(54, 54, 54);
-      color: white;
-      border-color: rgb(54, 54, 54);
-    }
-  
+  backdrop-filter: blur(23px) brightness(100%) saturate(80%);
+  -webkit-backdrop-filter: blur(23px) brightness(100%) saturate(80%);
+  border-radius: 16px;
+  /* visibility : "hidden"; */
+}
 
-  /* -------------------------------------------- */
-    detailsTitle{
-      display: block;
-      width: auto;
-      font-size: large;
-      text-align: center;
-    }
+#title {
+  color: black;
+}
 
-  /* ________________________________________________ */
+#detailsButton {
+  background-color: transparent;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  color: rgb(73, 73, 73);
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 3px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
 
-  /* maps */
-  #map {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0%;
-    top: 0%;
-    z-index: -2;
-  }
+#detailsButton:hover {
+  background-color: rgb(54, 54, 54);
+  color: white;
+  border-color: rgb(54, 54, 54);
+}
 
-  .container{
-    z-index: -3;
-  }
+/* -------------------------------------------- */
+detailsTitle {
+  display: block;
+  width: auto;
+  font-size: large;
+  text-align: center;
+}
 
+/* ________________________________________________ */
 
-  /* -------------------------------------------- */
-  /* popup with details */
+/* maps */
+#map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  top: 0%;
+  z-index: -2;
+}
+/* source: https://github.com/Leaflet/Leaflet/issues/2896 */
+.reverse-popup .leaflet-popup-tip-container {
+  position: absolute;
+  transform: rotate(180deg);
+  top: -20px;
+  left: 48.3%; /*to be centered better, maybe use % with margins or so*/
+}
 
-   /* Popup container */
+.container {
+  z-index: -3;
+}
+
+/* -------------------------------------------- */
+/* popup with details */
+
+/* Popup container */
+
 .detailsPopup {
   position: relative;
   display: inline-block;
@@ -234,6 +240,7 @@ p {
 }
 
 /* The actual popup (appears on top) */
+
 .detailsPopup .popuptext {
   visibility: hidden;
   width: 160px;
@@ -251,59 +258,55 @@ p {
 
 /* -------------------------------------------- */
 /* leaflet map stuff (tooltips and minipopup) */
-  .foliumtooltip {
+.foliumtooltip {
+}
+.foliumtooltip table {
+  margin: auto;
+}
+.foliumtooltip tr {
+  text-align: left;
+}
+.foliumtooltip th {
+  padding: 2px;
+  padding-right: 8px;
+}
 
-  }
-  .foliumtooltip table {
-    margin: auto;
-  }
-  .foliumtooltip tr {
-    text-align: left;
-  }
-  .foliumtooltip th {
-    padding: 2px;
-    padding-right: 8px;
-  }
+.foliumpopup {
 
-  .foliumpopup {
-    margin: auto;
-  }
-  .foliumpopup table {
-    margin: auto;
-  }
-  .foliumpopup popuptitle {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .foliumpopup popuptext {
-    font-size: 11px;
-  }
-  .foliumpopup tr {
-    text-align: left;
+}
+.foliumpopup table {
+  margin: auto;
+}
+.foliumpopup popuptitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.foliumpopup popuptext {
+  font-size: 11px;
+}
+.foliumpopup tr {
+  text-align: left;
+}
+.foliumpopup th {
+  padding: 2px;
+  padding-right: 8px;
+}
 
-  }
-  .foliumpopup th {
-    padding: 2px;
-    padding-right: 8px;
+/* -------------------------------------------- */
+/* links */
 
-  }
+.a:link {
+  text-decoration: none;
+}
 
-  /* -------------------------------------------- */
-  /* links */
+.a:visited {
+  text-decoration: none;
+}
 
-  .a:link{
-    text-decoration: none;
-  }
+.a:hover {
+  text-decoration: none;
+}
 
-  .a:visited{
-    text-decoration: none;
-  }
-
-  .a:hover{
-    text-decoration: none;
-  }
-
-  .a:active{
-    text-decoration: none;
-  }
-
+.a:active {
+  text-decoration: none;
+}

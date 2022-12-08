@@ -31,6 +31,40 @@ include("map_components/map_head.php");
     district = indexes["District"][id];
     //getting the district average farm size (value) with the district name
     value = Number(data["2021 average farm size"][district]);
+    value = (Math.round(value * 10) / 10)
+    return value;
+  }
+
+  function get_number_of_farms(feature) {
+
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+
+    //getting the district name with the id
+    district = indexes["District"][id];
+    //getting the district number of farms (value) with the district name
+    value = Number(data["2021 number of farms"][district]);
+    value = (Math.round(value * 100) / 100)
+    return value;
+  }
+
+  function get_total_farm_area(feature) {
+
+    //getting the data
+    var data = get_data();
+    var indexes = get_indexes();
+
+    //this is the id of the feature (map polygon)
+    id = Number(feature.id);
+
+    //getting the district name with the id
+    district = indexes["District"][id];
+    //getting the district number of farms (value) with the district name
+    value = Number(data["2021 total farm area"][district]);
     value = (Math.round(value * 100) / 100)
     return value;
   }
@@ -97,9 +131,15 @@ include("map_components/map_head.php");
         typeof feature == "object" ? JSON.stringify(feature) : feature;
       let fields = ["name", "id"];
       let aliases = ["District:", "(TEMPORARY) id:"];
+      // let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
+      // let value = "<br><popuptext>The average farm size in '" + get_name(current_tile) + "'' in 2021 was " + get_value(current_tile) + " ha.</popuptext><br>";
+      // div.innerHTML = title + value + detailsButton;
+
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value = "<br><popuptext>The average farm size in '" + get_name(current_tile) + "'' in 2021 was " + get_value(current_tile) + " ha.</popuptext><br>";
-      div.innerHTML = title + value + detailsButton;
+      let number_of_farms = "<br><popuptext>In 2021: <br>- The number of farms was " + get_number_of_farms(current_tile) + ".</popuptext><br>";
+      let total_farm_area = "<popuptext>- The total area of all farms was " + get_total_farm_area(current_tile) + " ha.</popuptext><br>";
+      let value = "<br><popuptextresult><strong>Therefore, the average farm size in '" + get_name(current_tile) + "' in 2021 was " + get_value(current_tile) + " ha.</strong></popuptextresult><br>";
+      div.innerHTML = title + number_of_farms + total_farm_area + value + detailsButton;
       return div;
     }, {
       className: "foliumpopup"

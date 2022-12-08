@@ -5,22 +5,21 @@
 <script>
   //coordinates of lower left and upper right corner of map when first displayed
   var bounds = [
-      [45.818078380326554, 5.9532480372932906],
-      [48.092333, 10.510867],
-    ];
+    [45.818078380326554, 5.9532480372932906],
+    [48.092333, 10.510867],
+  ];
 
-    var legend = document.querySelector('.legend');
+  var legend = document.querySelector('.legend');
   legend.style.background = get_legend();
 
   //function to write css of legend
-  function get_legend(){
+  function get_legend() {
     return "linear-gradient(to right, white," + color + ")";
   }
 
 
   var map = L.map(
-    "map",
-    {
+    "map", {
       attributionControl: false,
       center: [46.812976904438315, 8.223948423498864],
       crs: L.CRS.EPSG3857,
@@ -32,57 +31,73 @@
       //making sure you can't scroll away or zoom out too much
       maxBoundsViscosity: 1.0,
       minZoom: 7.5,
+      autoPanPaddingTopLeft: ([200, 200])
     }
   );
   //adding zoom and scale to bottom corners
-  L.control.zoom({position: 'bottomleft'}).addTo(map);
-  L.control.scale({position: 'bottomright'}).addTo(map);
+  L.control.zoom({
+    position: 'bottomleft'
+  }).addTo(map);
+  L.control.scale({
+    position: 'bottomright'
+  }).addTo(map);
 
-    //adding a white background layer
-    //TODO : change this to a local file
-    var imageUrl = 'https://www.colorhexa.com/ffffff.png',
-        imageBounds = [[55,-10], [30,30]];
+  //adding a white background layer
+  //TODO : change this to a local file
+  var imageUrl = 'https://www.colorhexa.com/ffffff.png',
+    imageBounds = [
+      [55, -10],
+      [30, 30]
+    ];
 
-    L.imageOverlay(imageUrl, imageBounds).addTo(map);
+  L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
-    //fitting the map to the bounds defined above
-    map.fitBounds(
-        bounds,
-        {}
-    );
+  //fitting the map to the bounds defined above
+  map.fitBounds(
+    bounds, {}
+  );
 
-    function get_indexes(){
+  function get_indexes() {
     //the same indexing which is used by the map
     var raw_indexes = <?php include('data/indexes_cantons.php'); ?>
-    
+
     return JSON.parse(raw_indexes);
   }
 
   //function which returns name of feature (+1 because Switzerland is included)
-  function get_name(feature){
+  function get_name(feature) {
     let indexes = get_indexes();
-    return indexes["Canton"][Number(feature.id)+1];
+    return indexes["Canton"][Number(feature.id) + 1];
 
   }
 
-    //this function is used to fill the different tiles
+  //this function is used to fill the different tiles
   function geo_json_4757a7460976929ab0308bc59cf096c8_styler(feature) {
     //getting the cantonal average farm size
     value = get_value(feature);
 
     //returning a fill-color depending on the value
-    return { fillOpacity: (value -min) / (max-min), weight: 1, color: color };
+    return {
+      fillOpacity: (value - min) / (max - min),
+      weight: 1,
+      color: color
+    };
   }
 
   //this function is called to fill the tile which we are hovering over
   function geo_json_4757a7460976929ab0308bc59cf096c8_highlighter(feature) {
 
-      //getting the cantonal average farm size
-        value = get_value(feature);
-        //returning a fill-color depending on the value
-        return { fillOpacity: (value -min) / (max-min), weight: 5, color: color };
-    
+    //getting the cantonal average farm size
+    value = get_value(feature);
+    //returning a fill-color depending on the value
+    return {
+      fillOpacity: (value - min) / (max - min),
+      weight: 5,
+      color: color
+    };
+
   }
+
   function geo_json_4757a7460976929ab0308bc59cf096c8_pointToLayer(
     feature,
     latlng
@@ -115,12 +130,12 @@
     layer
   ) {
     layer.on({
-      mouseout: function (e) {
+      mouseout: function(e) {
         if (typeof e.target.setStyle === "function") {
           geo_json_4757a7460976929ab0308bc59cf096c8.resetStyle(e.target);
         }
       },
-      mouseover: function (e) {
+      mouseover: function(e) {
         if (typeof e.target.setStyle === "function") {
           var layer = e.target;
           const highlightStyle =
@@ -148,8 +163,35 @@
   //get the coordinates from another php file
   geo_json_4757a7460976929ab0308bc59cf096c8_add(
 
-    <?php include("map_cantons_coordinates.php");?>
-    
-    );
+    <?php include("map_cantons_coordinates.php"); ?>
 
+  );
+
+  // source: https://github.com/Leaflet/Leaflet/issues/2896
+  /*HGH LATITUDE POPUPS OPENING DOWNWARD instead of UPWARD - prevent yoyo effect*/
+  map.on('popupopen', function(e) {
+    // saving old anchor point X Y
+    if (!e.popup.options.oldOffset) e.popup.options.oldOffset = e.popup.options.offset;
+    var px = map.project(e.popup._latlng);
+    // we calculate popup content height (jQuery)
+    var heightOpeningPopup = $('#map').find('.leaflet-popup-content').height();
+    var temp = px.y - heightOpeningPopup;
+    var temp2 = heightOpeningPopup + 58.5;
+    if (temp < 22800) { // if it will go above the world, we prevent it to do so
+      // we make the popup go below the poi instead of above
+      e.popup.options.offset = new L.Point(6, temp2);
+      // we make the popup tip to be pointing upward (jQuery)
+      $('#map').addClass("reverse-popup");
+      e.popup.update();
+    } else { // we allow auto pan if the popup can open in the normal upward way
+      e.popup.options.offset = e.popup.options.oldOffset;
+      e.popup.options.autoPan = true;
+      $('#map').removeClass("reverse-popup");
+      e.popup.update();
+    }
+  });
+
+  map.on('popupclose', function(e) {
+    e.popup.options.autoPan = false;
+  });
 </script>
