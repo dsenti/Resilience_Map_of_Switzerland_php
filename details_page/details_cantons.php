@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <link rel= "stylesheet" type= "text/css" href= "/../static/style.php">
 
 <script>
@@ -20,6 +19,10 @@
 <script>
     init();
 </script>
+
+
+
+
 <!-- onload = init runs the init function when the file is reloaded -->
 <iframebody>    
     <!-- placeholder text: -->

@@ -56,13 +56,6 @@
     bounds, {}
   );
 
-  function get_indexes() {
-    //the same indexing which is used by the map
-    var raw_indexes = <?php include('data/indexes_districts.php'); ?>
-
-    return JSON.parse(raw_indexes);
-  }
-
 
   //function which returns name of feature
   function get_name(feature) {

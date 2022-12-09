@@ -12,30 +12,13 @@ include("map_components/map_head.php");
   document.getElementById("legend_max").innerHTML = max + "%"
   document.getElementById("legend_min").innerHTML = min + "%"
 
-  function get_data() {
-    //the json files which were generated in create_data
-    var raw_data = <?php include("data/data_districts_farmers.php"); ?>;
-    return JSON.parse(raw_data);
-  }
-
   function get_value(feature) {
-
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
-
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district average farm size (value) with the district name
-    value = Number(data["farmers ratio"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
+    return get_farmer_percentage(feature);
   }
+  
 </script>
 
+<?php include("data/getter_functions_districts.php"); ?>
 <?php include("map_components/districts_map_init.php"); ?>
 
 <script>
@@ -60,7 +43,7 @@ include("map_components/map_head.php");
             <td>${handleObject(layer.feature.properties[v])}</td>
         </tr>
         <tr>
-                  <td>${String(get_value(layer.feature)) + "%"}</td>
+                  <td>${String(get_farmer_percentage(layer.feature)) + "%"}</td>
                 </tr>`
           )
           .join("")
@@ -98,7 +81,9 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["District:", "(TEMPORARY) id:"];
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value = "<br><popuptext>" + get_value(current_tile) + "% of the population of '" + get_name(current_tile) + "' in 2021 worked in the agricultural sector.</popuptext><br>";
+      let value = "<br><popuptext>In 2021:<br>- There were " + get_farmers(current_tile) +
+        " people who were active in the agricultural sector.<br>- The total population was " + get_population(current_tile) +
+        " people.<br><br><strong>Therefore, " + get_farmer_percentage(current_tile) + "% of the total population of '" + get_name(current_tile) + "' worked in the agricultural sector in 2021.</strong></popuptext><br>";
       div.innerHTML = title + value + detailsButton;
       return div;
     }, {
@@ -106,4 +91,3 @@ include("map_components/map_head.php");
     }
   );
 </script>
-

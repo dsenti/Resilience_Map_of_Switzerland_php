@@ -12,31 +12,18 @@ include("map_components/map_head.php");
   document.getElementById("legend_max").innerHTML = max + "%";
   document.getElementById("legend_min").innerHTML = min + "%";
 
-  function get_data() {
+  function get_organic_farming_data() {
     //the json files which were generated in create_data
     var raw_data = <?php include("data/data_cantons_organic_farming.php"); ?>;
     return JSON.parse(raw_data);
   }
 
-  function get_value(feature) {
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
-    id = Number(feature.id);
-    id += 1;
-
-    //getting the canton name with the id
-    canton = indexes["Canton"][id];
-    //getting the cantonal percentage of biological farming (value) with the canton name
-    value = Number(data["percentage biological farmland"][canton]);
-    value = Math.round(value * 100) / 100;
-
-    return value;
+  function get_value(feature){
+    return get_organic_farming_percentage(feature);
   }
-</script>
 
+</script>
+<?php include("data/getter_functions_cantons.php"); ?>;
 <?php include("map_components/cantons_map_init.php"); ?>
 
 <script>
@@ -61,7 +48,7 @@ include("map_components/map_head.php");
                   <td>${handleObject(layer.feature.properties[v])}</td>
                 </tr>
                 <tr>
-                  <td>${String(get_value(layer.feature)) + "%"}</td>
+                  <td>${String(get_organic_farming_percentage(layer.feature)) + "%"}</td>
                 </tr>`
           )
           .join("")
@@ -97,12 +84,9 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["Canton:", "(TEMPORARY) id:"];
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value =
-        "<br><popuptext>In " +
-        get_name(current_tile) +
-        " in 2021, " +
-        get_value(current_tile) +
-        "% of the total farmland was used for organic farming.</popuptext><br>";
+      let value = "<br><popuptext>In 2021:<br>- The total farmland was " + get_total_farm_area(current_tile) + " ha.<br>- The area used for organic farming was " + get_organic_farming_total_area(current_tile)+ 
+      " ha.<br><br><strong>Therefore, " + get_organic_farming_percentage(current_tile) +
+        "% of farmland of " + get_name(current_tile) + " in 2021 was used for organic farming.</strong></popuptext><br>";
       div.innerHTML = title + value + detailsButton;
       return div;
     }, {

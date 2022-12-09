@@ -12,64 +12,13 @@ include("map_components/map_head.php");
   document.getElementById("legend_max").innerHTML = max + " ha"
   document.getElementById("legend_min").innerHTML = min + " ha"
 
-  function get_data() {
-    //the json files which were generated in create_data
-    var raw_data = <?php include("data/data_districts_average_farm_size.php"); ?>;
-    return JSON.parse(raw_data);
+  function get_value(feature){
+    return get_average_farm_size(feature);
   }
-
-  function get_value(feature) {
-
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
-
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district average farm size (value) with the district name
-    value = Number(data["2021 average farm size"][district]);
-    value = (Math.round(value * 10) / 10)
-    return value;
-  }
-
-  function get_number_of_farms(feature) {
-
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
-
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district number of farms (value) with the district name
-    value = Number(data["2021 number of farms"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
-  }
-
-  function get_total_farm_area(feature) {
-
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
-
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district number of farms (value) with the district name
-    value = Number(data["2021 total farm area"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
-  }
+  
 </script>
 
+<?php include("data/getter_functions_districts.php"); ?>
 <?php include("map_components/districts_map_init.php"); ?>
 
 <script>
@@ -94,7 +43,7 @@ include("map_components/map_head.php");
             <td>${handleObject(layer.feature.properties[v])}</td>
         </tr>
         <tr>
-                  <td>${String(get_value(layer.feature)) + " ha"}</td>
+                  <td>${String(get_average_farm_size(layer.feature)) + " ha"}</td>
                 </tr>`
           )
           .join("")
@@ -132,13 +81,13 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["District:", "(TEMPORARY) id:"];
       // let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      // let value = "<br><popuptext>The average farm size in '" + get_name(current_tile) + "'' in 2021 was " + get_value(current_tile) + " ha.</popuptext><br>";
+      // let value = "<br><popuptext>The average farm size in '" + get_name(current_tile) + "'' in 2021 was " + get_average_farm_size(current_tile) + " ha.</popuptext><br>";
       // div.innerHTML = title + value + detailsButton;
 
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
       let number_of_farms = "<br><popuptext>In 2021: <br>- The number of farms was " + get_number_of_farms(current_tile) + ".</popuptext><br>";
       let total_farm_area = "<popuptext>- The total area of all farms was " + get_total_farm_area(current_tile) + " ha.</popuptext><br>";
-      let value = "<br><popuptextresult><strong>Therefore, the average farm size in '" + get_name(current_tile) + "' in 2021 was " + get_value(current_tile) + " ha.</strong></popuptextresult><br>";
+      let value = "<br><popuptextresult><strong>Therefore, the average farm size in '" + get_name(current_tile) + "' in 2021 was " + get_average_farm_size(current_tile) + " ha.</strong></popuptextresult><br>";
       div.innerHTML = title + number_of_farms + total_farm_area + value + detailsButton;
       return div;
     }, {

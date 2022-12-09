@@ -1,11 +1,7 @@
-
 <script>
     // hiding the details window when loading the site at first
     var iframe = $("#detailsIframe");
     iframe.hide();
-    // creating the button which calls the iframe
-    var detailsButton = '<button id="detailsButton" onclick="showDetails()">Details</button>';
-
 
     //variable that gets updated everytime a tile is pressed
     var current_tile;
@@ -13,6 +9,11 @@
     function getCurrentTile() {
         return current_tile;
     }
+
+    // creating the button which calls the iframe
+    var detailsButton = String('<button id="detailsButton" onclick="showDetails()">Details</button>');
+
+
     //this function opens the details window
     function showDetails() {
         //getting the iframe with it's id

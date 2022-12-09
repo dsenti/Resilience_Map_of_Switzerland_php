@@ -12,37 +12,18 @@ include("map_components/map_head.php");
   document.getElementById("legend_max").innerHTML = max + "%";
   document.getElementById("legend_min").innerHTML = min + "%";
 
-  function get_data() {
-    //the json files which were generated in create_data
-    var raw_data = <?php include("data/data_cantons_farmers.php"); ?>;
-    return JSON.parse(raw_data);
-  }
-
   function get_value(feature) {
-    //getting the data
-    var data = get_data();
-    var indexes = get_indexes();
-
-    //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
-    id = Number(feature.id);
-    id += 1;
-
-    //getting the canton name with the id
-    canton = indexes["Canton"][id];
-    //getting the farmer percentage (value) with the canton name
-    value = Number(data["farmers ratio"][canton]);
-    value = Math.round(value * 100) / 100;
-    return value;
+    return get_farmer_percentage(feature);
   }
 
-  </script>
+</script>
 
+<?php include("data/getter_functions_cantons.php"); ?>
 <?php include("map_components/cantons_map_init.php"); ?>
 
 <script>
-
   geo_json_4757a7460976929ab0308bc59cf096c8.bindTooltip(
-    function (layer) {
+    function(layer) {
       let div = L.DomUtil.create("div");
 
       let handleObject = (feature) =>
@@ -55,24 +36,26 @@ include("map_components/map_head.php");
         "<table>" +
         String(
           fields
-            .map(
-              (v, i) =>
-                `<tr>
+          .map(
+            (v, i) =>
+            `<tr>
 
                   <td>${handleObject(layer.feature.properties[v])}</td>
                 </tr>
                 <tr>
-                  <td>${String(get_value(layer.feature)) + "%"}</td>
+                  <td>${String(get_farmer_percentage(layer.feature)) + "%"}</td>
                 </tr>`
-            )
-            .join("")
+          )
+          .join("")
         ) +
         "</table>";
       div.innerHTML = table;
 
       return div;
-    },
-    { className: "foliumtooltip", sticky: true }
+    }, {
+      className: "foliumtooltip",
+      sticky: true
+    }
   );
 </script>
 <!-- IFRAME STUFF: -->
@@ -84,7 +67,7 @@ include("map_components/map_head.php");
 <script>
   //this function is responsible for creating the popup when clicking on a tile
   geo_json_4757a7460976929ab0308bc59cf096c8.bindPopup(
-    function (layer) {
+    function(layer) {
       hideDetails(); //closing the details window when clicking on another region
 
       current_tile = layer.feature; //updating the current tile
@@ -96,15 +79,14 @@ include("map_components/map_head.php");
       let fields = ["name", "id"];
       let aliases = ["Canton:", "(TEMPORARY) id:"];
       let title = "<popuptitle>" + get_name(current_tile) + "</popuptitle>";
-      let value =
-        "<br><popuptext>" +
-        get_value(current_tile) +
-        "% of the population of " +
-        get_name(current_tile) +
-        " in 2021 worked in the agricultural sector.</popuptext><br>";
+      let value = "<br><popuptext>In 2021:<br>- There were " + get_farmers(current_tile) +
+        " people who were active in the agricultural sector.<br>- The total population was " + get_population(current_tile) +
+        " people.<br><br><strong>Therefore, " + get_farmer_percentage(current_tile) + "% of the total population of " + get_name(current_tile) + " worked in the agricultural sector in 2021.</strong></popuptext><br>";
+
       div.innerHTML = title + value + detailsButton;
       return div;
-    },
-    { className: "foliumpopup" }
-  );  
+    }, {
+      className: "foliumpopup"
+    }
+  );
 </script>

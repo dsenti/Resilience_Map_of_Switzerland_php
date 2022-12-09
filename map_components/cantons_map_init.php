@@ -57,20 +57,6 @@
     bounds, {}
   );
 
-  function get_indexes() {
-    //the same indexing which is used by the map
-    var raw_indexes = <?php include('data/indexes_cantons.php'); ?>
-
-    return JSON.parse(raw_indexes);
-  }
-
-  //function which returns name of feature (+1 because Switzerland is included)
-  function get_name(feature) {
-    let indexes = get_indexes();
-    return indexes["Canton"][Number(feature.id) + 1];
-
-  }
-
   //this function is used to fill the different tiles
   function geo_json_4757a7460976929ab0308bc59cf096c8_styler(feature) {
     //getting the cantonal average farm size
