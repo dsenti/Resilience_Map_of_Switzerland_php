@@ -34,6 +34,9 @@ h1 {
   margin-top: -40px;
   position: relative;
   text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  font-weight: 700;
 }
 h2 {
   margin-top: -20px;

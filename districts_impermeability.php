@@ -6,7 +6,7 @@ include("map_components/map_head.php");
   //this is the color of the map!!
   var color = "#a00000"
   min = 0;
-  max = 50;
+  max = 30;
 
   //creating legend of map
   document.getElementById("legend_max").innerHTML = max + "%"

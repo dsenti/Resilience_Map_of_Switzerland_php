@@ -204,6 +204,12 @@
 
     // organic farming ============================================================================================================================
 
+    function get_organic_farming_data() {
+        //the json files which were generated in create_data
+        var raw_data = <?php include('data/data_cantons_organic_farming.php'); ?>;
+        return JSON.parse(raw_data);
+    }
+
     function get_organic_farming_percentage(feature) {
         //getting the data
         var data = get_organic_farming_data();

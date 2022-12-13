@@ -4,7 +4,7 @@ include("map_components/map_head.php");
 
 <script>
   //this is the color of the map!!
-  var color = "#9d52ad"
+  var color = "#710193"
   min = 8;
   max = 52;
 

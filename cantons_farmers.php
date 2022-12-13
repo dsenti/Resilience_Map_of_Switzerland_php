@@ -4,9 +4,9 @@ include("map_components/map_head.php");
 
 <script>
   //this is the color of the map!!
-  var color = "#917512";
+  var color = "#247D68";
   min = 0;
-  max = 7;
+  max = 5;
 
   //creating legend of map
   document.getElementById("legend_max").innerHTML = max + "%";
