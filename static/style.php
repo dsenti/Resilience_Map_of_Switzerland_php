@@ -6,5 +6,6 @@ header("Content-type: text/css");
 
 ?>
 <style>
-<?php include("stylesheet.css") ?>
+<?php include("stylesheet.css");
+include("style_barchart.css") ?>
 </style>

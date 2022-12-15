@@ -208,6 +208,8 @@ detailsTitle {
   text-align: center;
 }
 
+/* -------------------------------------------- */
+
 /* ________________________________________________ */
 
 /* maps */
@@ -232,19 +234,19 @@ detailsTitle {
 }
 
 /* -------------------------------------------- */
-/* popup with details */
+/* popup */
 
 /* Popup container */
 
-.detailsPopup {
+/* .detailsPopup {
   position: relative;
   display: inline-block;
   cursor: pointer;
-}
+} */
 
 /* The actual popup (appears on top) */
 
-.detailsPopup .popuptext {
+/* .detailsPopup .popuptext {
   visibility: hidden;
   width: 160px;
   background-color: #555;
@@ -257,7 +259,7 @@ detailsTitle {
   bottom: 125%;
   left: 50%;
   margin-left: -80px;
-}
+} */
 
 /* -------------------------------------------- */
 /* leaflet map stuff (tooltips and minipopup) */

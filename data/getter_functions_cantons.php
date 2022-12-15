@@ -21,6 +21,10 @@
         return JSON.parse(raw_data);
     }
 
+    function get_farm_size_max(){
+        return 42;
+    }
+
     function get_average_farm_size(feature) {
 
         //getting the data

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php include("tabs/tab_average_farm_size.php");
 include("map_components/map_head.php");
 ?>
@@ -19,7 +20,8 @@ include("map_components/map_head.php");
 
 </script>
 
-<?php include("data/getter_functions_cantons.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/data/getter_functions_cantons.php"); ?>
+
 <?php include("map_components/cantons_map_init.php"); ?>
 
 <script>
