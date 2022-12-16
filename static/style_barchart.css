@@ -2,60 +2,245 @@
 /* inspiration: https://www.coding-dude.com/wp/html5/bar-chart-html/ */
 
 .chart {
-    margin-left: 1.5%;
-    margin-top: 1.5em;
-    width: 80%;
-  }
-  
-  .chart .grid {
-    position: relative;
-    padding: 5px 0 5px 0;
-    height: 100%;
-    width: 100%;
-    border-left: 2px solid #aaa;
-    background: repeating-linear-gradient(90deg, transparent, transparent 19.5%, rgba(170, 170, 170, 0.7) 20%);
-  }
-  .afs_chart .grid::before {
-    font-size: 0.8em;
-    font-weight: bold;
-    content: '0 ha';
-    position: absolute;
-    left: -0.5em;
-    top: -1.5em;
-  }
-  .afs_chart .grid::after {
-    font-size: 0.8em;
-    font-weight: bold;
-    content: '42 ha';
-    position: absolute;
-    right: -1.5em;
-    top: -1.5em;
-  }
-  .chart .bar {
-    box-sizing:border-box;
-    width: var(--bar-value);
-    height: 30px;
-    margin: 10px 0;
-    background-color: #ccccccbe;
-    border-radius: 0 4px 4px 0;
-    padding-left: var(--bar-value);
-    white-space: pre;
-    padding-top: 6px;
-  }
+  margin-left: 1.5%;
+  margin-top: 1.5em;
+  width: 80%;
+  margin: 0 auto;
+}
 
-  .chart .bar.stats{
-    box-sizing:border-box;
-    width: var(--bar-value);
-    height: 20px;
-    margin: 10px 0;
-    background-color: #00000028;
-    border-radius: 0 4px 4px 0;
-    padding-left: var(--bar-value);
-    white-space: pre;
-    padding-top: 4px;
-  }
+.charttitle{
+  position: relative;
+  margin-left: -7px;
+  font-weight: bold;
+}
+.charttext{
+  position: relative;
+  margin-bottom: 1.5em;
+  margin-left: -7px;
+}
 
-  .chart .bar:hover {
-    font-weight: bold;
-  }
-  
+.chart .grid {
+  position: relative;
+  padding: 5px 0 5px 0;
+  height: 100%;
+  width: 100%;
+  border-left: 2px solid #aaa;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 24.5%,
+    rgba(0, 0, 0, 0.247) 25%
+  );
+}
+
+.chart .bar {
+  box-sizing: border-box;
+  width: var(--bar-value);
+  height: 30px;
+  margin: 10px 0;
+  background-color: #00000028;
+  border-radius: 0 4px 4px 0;
+  padding-left: var(--bar-value);
+  white-space: pre;
+  padding-top: 6px;
+}
+
+.chart .bar.stats {
+  box-sizing: border-box;
+  width: var(--bar-value);
+  height: 20px;
+  margin: 10px 0;
+  background-color: #00000028;
+  border-radius: 0 4px 4px 0;
+  padding-left: var(--bar-value);
+  white-space: pre;
+  padding-top: 4px;
+}
+
+.chart .bar:hover {
+  font-weight: bold;
+}
+
+/* the two min and max labels at the top of all the charts for the cantons */
+
+/* average farm size */
+.afs_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0 ha";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.afs_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "42 ha";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* soil artificialization */
+.sar_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.sar_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "1.1%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* impermeability */
+.imp_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.imp_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "49.5%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* organic farming */
+.orf_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.orf_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "66.2%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* farmers */
+.far_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.far_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "6.1%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* the two min and max labels at the top of all the charts for the districts */
+
+/* average farm size */
+.d_afs_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0 ha";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.d_afs_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "52.5 ha";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* soil artificialization */
+.d_sar_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.d_sar_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "3.19%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* impermeability */
+.d_imp_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.d_imp_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "49.5%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* organic farming */
+.d_orf_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.d_orf_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "83.6%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* farmers */
+.d_far_chart .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "0%";
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+.d_far_chart .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: "10.5%";
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}

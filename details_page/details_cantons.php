@@ -1,32 +1,81 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="/../static/style.php">
-<script src="https://cdn.anychart.com/releases/v8/js/anychart-core.min.js"></script>
-<script src="https://cdn.anychart.com/releases/v8/js/anychart-cartesian.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
 
 <head>
-    <detailsTitle id="title"> Title </detailsTitle>
+    <detailsTitle id="detailstitle"> Title </detailsTitle>
 </head>
 
 
 
-<iframebody>
+<iframebody id="iframebody">
     <br>
-    <strong>Average farm size: </strong><br>
+    <!-- title of the bar chart -->
     <div class="chart vertical">
+        <div class="charttitle">Average Farm Size</div>
+        <div class="charttext">This indicator calculates the average farm size of the region.</div>
         <div class="afs_chart">
             <div class="grid">
-                <div class="bar" id="bar_afs" style="--bar-value:85%;" data-name=""> Error</div>
+                <!-- the bar which shows the actual value (more height than bar stats, style and data-name are overwritten) -->
+                <div class="bar" id="bar_afs" style="--bar-value:100%;" data-name=""> Error</div>
+                <!-- the two bars which represent the stats bars, mean and median are taken from data analysis, bar-value is calculated by mean/max*100 -->
                 <div class="bar stats" id="bar_afs_mean" style="--bar-value:53.19%;" data-name=""> 22.3 ha (mean)</div>
                 <div class="bar stats" id="bar_afs_median" style="--bar-value:47.38%;" data-name=""> 19.9 ha (median)</div>
             </div>
         </div>
     </div>
     <br>
-    Rate of soil artificialization: <details_stat id="soil_art">x</details_stat>%.<br>
-    Percentage of artificially impermeable area: <details_stat id="imp">x</details_stat>%.<br>
-    Percentage of Organic Farming: <details_stat id="orfa">x</details_stat>%.<br>
-    Percentage of population active in agriculture: <details_stat id="farmers">x</details_stat>%.<br>
+    <div class="chart vertical" id="sar_chart">
+        <div class="charttitle">Rate of Soil Artificialization:</div>
+        <div class="charttext">This indicator calculates how much of the total area of the region has seen a change from natural habitats to some kind of artificial soil use between 2009 and 2018.</div>
+        <div class="sar_chart">
+            <div class="grid">
+                <div class="bar" id="bar_sar" style="--bar-value:100%;" data-name=""> Error</div>
+                <div class="bar stats" id="bar_sar_mean" style="--bar-value:47.8%;" data-name=""> 0.53% (mean)</div>
+                <div class="bar stats" id="bar_sar_median" style="--bar-value:46.52%;" data-name=""> 0.51% (median)</div>
+            </div>
+        </div>
+    </div>
     <br>
+    <div class="chart vertical" id="imp_chart">
+        <div class="charttitle">Percentage of Artificially Impermeable Area</div>
+        <div class="charttext">This indicator calculates the area which has been rendered artificially impermeable (not allowing water to pass through) as a percentage of the total area of the region. 
+            This includes buildings, roads etc but doesn't include naturally impermeable surfaces such as rock.</div>
+        <div class="imp_chart">
+            <div class="grid">
+                <div class="bar" id="bar_imp" style="--bar-value:100%;" data-name=""> Error</div>
+                <div class="bar stats" id="bar_imp_mean" style="--bar-value:17.51%;" data-name=""> 8.67% (mean)</div>
+                <div class="bar stats" id="bar_imp_median" style="--bar-value:12.38%;" data-name=""> 6.13% (median)</div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="chart vertical" id="orf_chart">
+        <div class="charttitle">Percentage of Organic Farming</div>
+        <div class="charttext">This indicator calculates the percentage of farmland which is used as organic farming.</div>
+        <div class="orf_chart">
+            <div class="grid">
+                <div class="bar" id="bar_orf" style="--bar-value:100%;" data-name=""> Error</div>
+                <div class="bar stats" id="bar_orf_mean" style="--bar-value:29.89%;" data-name=""> 19.78% (mean)</div>
+                <div class="bar stats" id="bar_orf_median" style="--bar-value:26.00%;" data-name=""> 17.2% (median)</div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="chart vertical" id="far_chart">
+        <div class="charttitle">Percentage of Population Active in Agriculture:</div>
+        <div class="charttext">This indicator calculates the percentage of the population of the region, which works in the agricultural sector.</div>
+        <div class="far_chart">
+            <div class="grid">
+                <div class="bar" id="bar_far" style="--bar-value:100%;" data-name=""> Error</div>
+                <div class="bar stats" id="bar_far_mean" style="--bar-value:36.95%;" data-name=""> 2.24% (mean)</div>
+                <div class="bar stats" id="bar_far_median" style="--bar-value:38.45%;" data-name=""> 2.33% (median)</div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
 
 </iframebody>
 
@@ -39,18 +88,8 @@
         if (window.parent.getCurrentTile()) { //making sure it is defined to escape error
             var Canton = window.parent.getCurrentTile();
             //we then set the document title to the corresponding name of the canton using the get_name function of the map file
-            title = document.getElementById("title")
+            title = document.getElementById("detailstitle")
             title.innerHTML = window.parent.get_name(Canton);
-
-            //getting the indicators of the current tile
-            soil_art = document.getElementById("soil_art")
-            soil_art.innerHTML = window.parent.get_soil_artificialization(Canton);
-            imp = document.getElementById("imp")
-            imp.innerHTML = window.parent.get_impermeability_percentage(Canton);
-            orfa = document.getElementById("orfa")
-            orfa.innerHTML = window.parent.get_organic_farming_percentage(Canton);
-            farmers = document.getElementById("farmers")
-            farmers.innerHTML = window.parent.get_farmer_percentage(Canton);
 
             //adjusting the barcharts for Average Farm Size
             afs_bar = document.getElementById("bar_afs");
@@ -58,10 +97,45 @@
             afs_bar.style = "--bar-value:" + afs_bar_width + "%;";
             afs_bar.innerHTML = " " + window.parent.get_average_farm_size(Canton) + " ha";
             afs_bar.style.backgroundColor = "#9d52ad" + transparency_to_hex(afs_bar_width);
-            console.log(afs_bar.style.backgroundColor)
+            //adjusting the barcharts for Soil Artificialization
+            sar_bar = document.getElementById("bar_sar");
+            sar_bar_width = (window.parent.get_soil_artificialization(Canton) / window.parent.get_soil_artificialization_max()) * 100;
+            sar_bar.style = "--bar-value:" + sar_bar_width + "%;";
+            sar_bar.innerHTML = " " + window.parent.get_soil_artificialization(Canton) + " %";
+            sar_bar.style.backgroundColor = "#0033a9" + transparency_to_hex(sar_bar_width);
+            //adjusting the barcharts for Impermeability
+            imp_bar = document.getElementById("bar_imp");
+            imp_bar_width = (window.parent.get_impermeability_percentage(Canton) / window.parent.get_impermeability_percentage_max()) * 100;
+            imp_bar.style = "--bar-value:" + imp_bar_width + "%;";
+            imp_bar.innerHTML = " " + window.parent.get_impermeability_percentage(Canton) + " %";
+            imp_bar.style.backgroundColor = "#a00000" + transparency_to_hex(imp_bar_width + 10);
+            //adjusting the barcharts for Organic Farming
+            orf_bar = document.getElementById("bar_orf");
+            orf_bar_width = (window.parent.get_organic_farming_percentage(Canton) / window.parent.get_organic_farming_percentage_max()) * 100;
+            orf_bar.style = "--bar-value:" + orf_bar_width + "%;";
+            orf_bar.innerHTML = " " + window.parent.get_organic_farming_percentage(Canton) + " %";
+            orf_bar.style.backgroundColor = "#00570e" + transparency_to_hex(orf_bar_width + 10);
+            //adjusting the barcharts for Farmers
+            far_bar = document.getElementById("bar_far");
+            far_bar_width = (window.parent.get_farmer_percentage(Canton) / window.parent.get_farmer_percentage_max()) * 100;
+            far_bar.style = "--bar-value:" + far_bar_width + "%;";
+            far_bar.innerHTML = " " + window.parent.get_farmer_percentage(Canton) + " %";
+            far_bar.style.backgroundColor = "#247D68" + transparency_to_hex(far_bar_width + 10);
+
+            //positioning barchart of current tab at the top
+            if (String(window.parent.location.href).endsWith("average_farm_size.php")) {
+                $('#afs_chart').prependTo('#iframebody')
+            } else if (String(window.parent.location.href).endsWith("soil_artificialization.php")) {
+                $('#sar_chart').prependTo('#iframebody')
+            } else if (String(window.parent.location.href).endsWith("impermeability.php")) {
+                $('#imp_chart').prependTo('#iframebody')
+            } else if (String(window.parent.location.href).endsWith("organic_farming.php")) {
+                $('#orf_chart').prependTo('#iframebody')
+            } else if (String(window.parent.location.href).endsWith("farmers.php")) {
+                $('#far_chart').prependTo('#iframebody')
+            }
 
         }
-
     }
 
     function transparency_to_hex(transparency) {
@@ -89,4 +163,60 @@
     }
 
     init();
+</script>
+
+<button id="iframebackbutton" onclick="window.parent.hideDetails()">close</button>
+
+<script>
+    // source for rgb2hex function: http://wowmotty.blogspot.com/2017/05/convert-rgba-output-to-hex-color.html
+    function rgb2hex(orig) {
+        var a, isPercent,
+            rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+            alpha = (rgb && rgb[4] || "").trim(),
+            hex = rgb ? "#" +
+            (rgb[1] | 1 << 8).toString(16).slice(1) +
+            (rgb[2] | 1 << 8).toString(16).slice(1) +
+            (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
+        if (alpha !== "") {
+            isPercent = alpha.indexOf("%") > -1;
+            a = parseFloat(alpha);
+            if (!isPercent && a >= 0 && a <= 1) {
+                a = Math.round(255 * a);
+            } else if (isPercent && a >= 0 && a <= 100) {
+                a = Math.round(255 * a / 100)
+            } else {
+                a = "";
+            }
+        }
+        if (a) {
+            hex += (a | 1 << 8).toString(16).slice(1);
+        }
+        return hex;
+    }
+
+    //changes the opacity of the backgroundcolor of the element passed to the percentage (rounded up to the neares multiple of ten)
+    function changeopacity(element, percentage) {
+        var bgcolor = element.style.backgroundColor;
+        bgcolor = rgb2hex(bgcolor);
+        element.style.backgroundColor = String(bgcolor).slice(0, 7) + String(transparency_to_hex(percentage));
+    }
+
+    //changes the opacity of the background color to 100% when you hover over the bar
+    var hoverfunction = function() {
+        changeopacity(this, 100);
+    }
+
+    //changes the opacity back to what it was when the mouse doesn't hover anymore
+    var endhoverfunction = function() {
+        var percentage = this.style.cssText;
+        percentage = percentage.slice(13, 16);
+        changeopacity(this, percentage);
+    }
+
+    //applying the functions defined above to the object eventlisteners
+    const bars = document.querySelectorAll('.bar:not(.stats)');
+    bars.forEach(bar => {
+        bar.addEventListener('mouseover', hoverfunction)
+        bar.addEventListener('mouseout', endhoverfunction)
+    })
 </script>

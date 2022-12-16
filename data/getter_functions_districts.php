@@ -5,11 +5,22 @@
 
         return JSON.parse(raw_indexes);
     }
+    //function which returns name of feature
+    function get_name(feature) {
+        let indexes = get_indexes();
+        let full_name = indexes["District"][Number(feature.id)]
+        return full_name.slice(3, full_name.length);
+    }
 
+    //   =======================================================================================================
     function get_average_farm_size_data() {
         //the json files which were generated in create_data
         var raw_data = <?php include("data/data_districts_average_farm_size.php"); ?>;
         return JSON.parse(raw_data);
+    }
+
+    function get_farm_size_max() {
+        return 52.5;
     }
 
     function get_average_farm_size(feature) {
@@ -68,6 +79,10 @@
         //the json files which were generated in create_data
         var raw_data = <?php include("data/data_districts_artificialization.php"); ?>;
         return JSON.parse(raw_data);
+    }
+
+    function get_soil_artificialization_max() {
+        return 3.19;
     }
 
     function get_soil_artificialization(feature) {
@@ -150,6 +165,10 @@
         return JSON.parse(raw_data);
     }
 
+    function get_impermeability_percentage_max() {
+        return 49.5;
+    }
+
     function get_impermeability_percentage(feature) {
 
         //getting the data
@@ -194,6 +213,10 @@
         return JSON.parse(raw_data);
     }
 
+    function get_organic_farming_percentage_max() {
+        return 83.6;
+    }
+
     function get_organic_farming_percentage(feature) {
 
         //getting the data
@@ -232,59 +255,63 @@
 
     //farmers ===============================================================================================================================
     function get_farmers_data() {
-    //the json files which were generated in create_data
-    var raw_data = <?php include("data/data_districts_farmers.php"); ?>;
-    return JSON.parse(raw_data);
-  }
+        //the json files which were generated in create_data
+        var raw_data = <?php include("data/data_districts_farmers.php"); ?>;
+        return JSON.parse(raw_data);
+    }
 
-  function get_farmer_percentage(feature) {
+    function get_farmer_percentage_max() {
+        return 10.5;
+    }
 
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+    function get_farmer_percentage(feature) {
 
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district average farm size (value) with the district name
-    value = Number(data["farmers ratio"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
-  }
+        //this is the id of the feature (map polygon)
+        id = Number(feature.id);
 
-  function get_farmers(feature) {
+        //getting the district name with the id
+        district = indexes["District"][id];
+        //getting the district average farm size (value) with the district name
+        value = Number(data["farmers ratio"][district]);
+        value = (Math.round(value * 100) / 100)
+        return value;
+    }
 
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+    function get_farmers(feature) {
 
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district average farm size (value) with the district name
-    value = Number(data["farmers"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
-  }
+        //this is the id of the feature (map polygon)
+        id = Number(feature.id);
 
-  function get_population(feature) {
+        //getting the district name with the id
+        district = indexes["District"][id];
+        //getting the district average farm size (value) with the district name
+        value = Number(data["farmers"][district]);
+        value = (Math.round(value * 100) / 100)
+        return value;
+    }
 
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+    function get_population(feature) {
 
-    //this is the id of the feature (map polygon)
-    id = Number(feature.id);
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the district name with the id
-    district = indexes["District"][id];
-    //getting the district average farm size (value) with the district name
-    value = Number(data["population"][district]);
-    value = (Math.round(value * 100) / 100)
-    return value;
-  }
+        //this is the id of the feature (map polygon)
+        id = Number(feature.id);
+
+        //getting the district name with the id
+        district = indexes["District"][id];
+        //getting the district average farm size (value) with the district name
+        value = Number(data["population"][district]);
+        value = (Math.round(value * 100) / 100)
+        return value;
+    }
 </script>

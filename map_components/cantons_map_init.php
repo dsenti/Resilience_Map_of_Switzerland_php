@@ -180,4 +180,8 @@
   map.on('popupclose', function(e) {
     e.popup.options.autoPan = false;
   });
+
+  map.on('click', function(e){
+    hideDetails()
+  })
 </script>

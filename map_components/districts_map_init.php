@@ -57,13 +57,6 @@
   );
 
 
-  //function which returns name of feature
-  function get_name(feature) {
-    let indexes = get_indexes();
-    let full_name = indexes["District"][Number(feature.id)]
-    return full_name.slice(3, full_name.length);
-  }
-
   //this function is used to fill the different tiles
   function geo_json_8a893a869ac36e93724032a2dd24d64c_styler(feature) {
     //getting the district average farm size
@@ -172,7 +165,6 @@
     // we calculate popup content height (jQuery)
     var heightOpeningPopup = $('#map').find('.leaflet-popup-content').height();
     var temp = px.y - heightOpeningPopup;
-    console.log(temp)
     var temp2 = heightOpeningPopup + 58.5;
     if (temp < 22800) { // if it will go above the world, we prevent it to do so
       // we make the popup go below the poi instead of above
@@ -191,4 +183,8 @@
   map.on('popupclose', function(e) {
     e.popup.options.autoPan = false;
   });
+
+  map.on('click', function(e){
+    hideDetails()
+  })
 </script>

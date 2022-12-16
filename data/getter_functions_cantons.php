@@ -21,7 +21,7 @@
         return JSON.parse(raw_data);
     }
 
-    function get_farm_size_max(){
+    function get_farm_size_max() {
         return 42;
     }
 
@@ -84,6 +84,10 @@
         //the json files which were generated in create_data
         var raw_data = <?php include('data/data_cantons_artificialization.php'); ?>;
         return JSON.parse(raw_data);
+    }
+
+    function get_soil_artificialization_max() {
+        return 1.1;
     }
 
     function get_soil_artificialization(feature) {
@@ -170,6 +174,10 @@
         return JSON.parse(raw_data);
     }
 
+    function get_impermeability_percentage_max() {
+        return 49.5;
+    }
+
     function get_impermeability_percentage(feature) {
         //getting the data
         var data = get_impermeability_data();
@@ -214,6 +222,10 @@
         return JSON.parse(raw_data);
     }
 
+    function get_organic_farming_percentage_max() {
+        return 66.19;
+    }
+
     function get_organic_farming_percentage(feature) {
         //getting the data
         var data = get_organic_farming_data();
@@ -252,59 +264,63 @@
 
     //farmers =================================================================================================================================
     function get_farmers_data() {
-    //the json files which were generated in create_data
-    var raw_data = <?php include("data/data_cantons_farmers.php"); ?>;
-    return JSON.parse(raw_data);
-  }
+        //the json files which were generated in create_data
+        var raw_data = <?php include("data/data_cantons_farmers.php"); ?>;
+        return JSON.parse(raw_data);
+    }
 
-  function get_farmer_percentage(feature) {
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+    function get_farmer_percentage_max() {
+        return 6.07;
+    }
 
-    //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
-    id = Number(feature.id);
-    id += 1;
+    function get_farmer_percentage(feature) {
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the canton name with the id
-    canton = indexes["Canton"][id];
-    //getting the farmer percentage (value) with the canton name
-    value = Number(data["farmers ratio"][canton]);
-    value = Math.round(value * 100) / 100;
-    return value;
-  }
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
 
-  function get_population(feature) {
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the farmer percentage (value) with the canton name
+        value = Number(data["farmers ratio"][canton]);
+        value = Math.round(value * 100) / 100;
+        return value;
+    }
 
-    //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
-    id = Number(feature.id);
-    id += 1;
+    function get_population(feature) {
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the canton name with the id
-    canton = indexes["Canton"][id];
-    //getting the farmer percentage (value) with the canton name
-    value = Number(data["population"][canton]);
-    value = Math.round(value * 100) / 100;
-    return value;
-  }
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
 
-  function get_farmers(feature) {
-    //getting the data
-    var data = get_farmers_data();
-    var indexes = get_indexes();
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the farmer percentage (value) with the canton name
+        value = Number(data["population"][canton]);
+        value = Math.round(value * 100) / 100;
+        return value;
+    }
 
-    //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
-    id = Number(feature.id);
-    id += 1;
+    function get_farmers(feature) {
+        //getting the data
+        var data = get_farmers_data();
+        var indexes = get_indexes();
 
-    //getting the canton name with the id
-    canton = indexes["Canton"][id];
-    //getting the farmer percentage (value) with the canton name
-    value = Number(data["farmers"][canton]);
-    value = Math.round(value * 100) / 100;
-    return value;
-  }
+        //this is the id of the feature (map polygon) we have to increase by one because the data includes "Switzerland"
+        id = Number(feature.id);
+        id += 1;
+
+        //getting the canton name with the id
+        canton = indexes["Canton"][id];
+        //getting the farmer percentage (value) with the canton name
+        value = Number(data["farmers"][canton]);
+        value = Math.round(value * 100) / 100;
+        return value;
+    }
 </script>
