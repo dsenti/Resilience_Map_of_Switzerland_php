@@ -35,7 +35,7 @@ h1 {
   position: relative;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  
+
   font-weight: 700;
 }
 h2 {
@@ -112,6 +112,110 @@ p {
   color: white;
   border-color: rgb(54, 54, 54);
 }
+/* ____________________________________________
+  home tab */
+
+/* Dropdown Button */
+/* https://csslayout.io/nested-dropdowns/ */
+/* The sub nested-dropdowns */
+.nested-dropdowns ul {
+  /* Hidden by default */
+  display: none;
+
+  /* Absolute position */
+  left: -40px;
+  position: absolute;
+  top: 100%;
+
+  /* Reset styles */
+  list-style-type: none;
+}
+
+/* The second level sub nested-dropdowns */
+.nested-dropdowns ul ul {
+  left: 130px;
+  position: absolute;
+  top: -15px;
+  /* Reset list styles */
+  list-style-type: none;
+}
+
+/* Show the direct sub nested-dropdowns when hovering the list item */
+.nested-dropdowns li:hover > ul {
+  display: block;
+}
+
+
+.nested-dropdowns {
+  position: absolute;
+  margin-left: 5%;
+  top: 30%;
+  z-index: 3;
+
+  /* Reset list styles */
+  list-style-type: none;
+}
+
+.dropdownbutton :hover {
+  background-color: red;
+}
+
+.dropdownbutton {
+  background-color: #a5a5a5;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  min-width: none;
+}
+
+.nested-dropdowns li {
+  /* Used to position the sub nested-dropdowns */
+  position: relative;
+}
+
+.tilescale {
+  background-color: lightgray;
+  padding: 10px;
+  font-size: 14px;
+  filter: drop-shadow(0, 0, 4px, rgb(0, 0, 0));
+  border-radius: 5px;
+  /* Reset list styles */
+  list-style-type: none;
+  cursor: pointer;
+}
+
+/* doesn't work for whatever reason */
+.tilescale :hover .tilescale{
+  background-color: #2e2e2e;
+}
+
+.nested-dropdowns__item {
+  background-color: lightgrey;
+  min-width: 150px;
+  background-color: lightgray;
+  padding: 10px;
+  font-size: 14px;
+  filter: drop-shadow(0, 0, 4px, rgb(0, 0, 0));
+  border-radius: 5px;
+  /* Reset list styles */
+  list-style-type: none;
+}
+
+
+/* -------------------- */
+
+.chartIframe {
+  width: 100%;
+  height: 80%;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  display: block;
+}
 
 /* ____________________________________________
   legend */
@@ -175,7 +279,7 @@ p {
   /* visibility : "hidden"; */
 }
 
-#iframebackbutton{
+#iframebackbutton {
   position: absolute;
   background-color: transparent;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -205,8 +309,6 @@ detailsTitle {
   color: black;
   font-weight: bold;
   text-align: center;
-  
-
 }
 
 #detailsButton {
@@ -232,7 +334,6 @@ detailsTitle {
 }
 
 /* -------------------------------------------- */
-
 
 /* -------------------------------------------- */
 
@@ -303,7 +404,6 @@ detailsTitle {
 }
 
 .foliumpopup {
-
 }
 .foliumpopup table {
   margin: auto;

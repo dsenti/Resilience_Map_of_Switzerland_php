@@ -17,11 +17,7 @@
     </div> 
   </head>
   <body>
-    <div class="container"></div>
-    <div class = "legend" id = "legend"> </div>
-    <div class = "legend_min" id = "legend_min"> </div>
-    <div class = "legend_max" id = "legend_max"> </div>
-    <div class = "legend_background" id = "legend_background"></div>
+
   </body>
 
 
