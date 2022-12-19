@@ -11,6 +11,7 @@
     <iframe class="chartIframe" id="cafs_chartIframe" src="charts/brushable_bar_chart_cafs.php" title="Chart" frameborder="0" style="display:block;"></iframe>
     <iframe class="chartIframe" id="dafs_chartIframe" src="charts/brushable_bar_chart_dafs.php" title="Chart" frameborder="0" style="display:block;"></iframe>
     <iframe class="chartIframe" id="csar_chartIframe" src="charts/brushable_bar_chart_csar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="dsar_chartIframe" src="charts/brushable_bar_chart_dsar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
 
 
     <!-- https://csslayout.io/nested-dropdowns/ -->
@@ -25,8 +26,8 @@
                         Average Farm Size
                     </div>
                     <ul>
-                        <li class = "tilescale"><a onclick="show_cafs()">Cantons1</a></li>
-                        <li class = "tilescale"><a onclick="show_dafs();">Districts1</a></li>
+                        <li class = "tilescale"><a onclick="show_cafs()">Cantons</a></li>
+                        <li class = "tilescale"><a onclick="show_dafs();">Districts</a></li>
                     </ul>
                 </li>
                 <li>
@@ -34,8 +35,8 @@
                         Soil Artificialization
                     </div>
                     <ul>
-                        <li class = "tilescale"><a onclick="show_csar()">Cantons2</a></li>
-                        <li class = "tilescale"><a onclick="show_dafs();">Districts2</a></li>
+                        <li class = "tilescale"><a onclick="show_csar()">Cantons</a></li>
+                        <li class = "tilescale"><a onclick="show_dsar();">Districts</a></li>
 
                     </ul>
                 </li>
@@ -72,5 +73,10 @@
     function show_csar() {
         hide_charts();
         document.getElementById("csar_chartIframe").style.display = "block";
+    }
+
+    function show_dsar() {
+        hide_charts();
+        document.getElementById("dsar_chartIframe").style.display = "block";
     }
 </script>

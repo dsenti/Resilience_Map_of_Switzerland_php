@@ -118,6 +118,15 @@ p {
 /* Dropdown Button */
 /* https://csslayout.io/nested-dropdowns/ */
 /* The sub nested-dropdowns */
+
+.nested-dropdowns {
+  position: absolute;
+  margin-left: 5%;
+  top: 30%;
+  /* Reset list styles */
+  list-style-type: none;
+}
+
 .nested-dropdowns ul {
   /* Hidden by default */
   display: none;
@@ -129,6 +138,7 @@ p {
 
   /* Reset styles */
   list-style-type: none;
+
 }
 
 /* The second level sub nested-dropdowns */
@@ -138,6 +148,14 @@ p {
   top: -15px;
   /* Reset list styles */
   list-style-type: none;
+  z-index: 10;
+}
+
+.nested-dropdowns li {
+  /* Used to position the sub nested-dropdowns */
+  position: relative;
+  /* Reset list styles */
+  list-style-type: none;
 }
 
 /* Show the direct sub nested-dropdowns when hovering the list item */
@@ -145,65 +163,32 @@ p {
   display: block;
 }
 
-
-.nested-dropdowns {
-  position: absolute;
-  margin-left: 5%;
-  top: 30%;
-  z-index: 3;
-
-  /* Reset list styles */
-  list-style-type: none;
-}
-
-.dropdownbutton :hover {
-  background-color: red;
-}
-
-.dropdownbutton {
-  background-color: #a5a5a5;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0;
-  min-width: none;
-}
-
-.nested-dropdowns li {
-  /* Used to position the sub nested-dropdowns */
-  position: relative;
-}
-
-.tilescale {
+.dropdownlist li{
   background-color: lightgray;
-  padding: 10px;
   font-size: 14px;
-  filter: drop-shadow(0, 0, 4px, rgb(0, 0, 0));
-  border-radius: 5px;
-  /* Reset list styles */
-  list-style-type: none;
-  cursor: pointer;
 }
 
-/* doesn't work for whatever reason */
-.tilescale :hover .tilescale{
-  background-color: #2e2e2e;
+.dropdownlist li:hover{
+  background-color: darkgrey;
 }
 
 .nested-dropdowns__item {
-  background-color: lightgrey;
   min-width: 150px;
-  background-color: lightgray;
-  padding: 10px;
-  font-size: 14px;
-  filter: drop-shadow(0, 0, 4px, rgb(0, 0, 0));
-  border-radius: 5px;
-  /* Reset list styles */
-  list-style-type: none;
+  padding:10px;
 }
+
+.tilescale{
+  cursor: pointer;
+    padding:10px;
+}
+
+.dropdownbutton{
+  background-color: lightgray;
+  z-index: 12;
+  padding: 10px;
+}
+
+
 
 
 /* -------------------- */
