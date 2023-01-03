@@ -119,6 +119,11 @@ p {
 /* https://csslayout.io/nested-dropdowns/ */
 /* The sub nested-dropdowns */
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 .nested-dropdowns {
   position: absolute;
   margin-left: 5%;
@@ -132,18 +137,18 @@ p {
   display: none;
 
   /* Absolute position */
-  left: -40px;
+  /* left: -40px; */
   position: absolute;
   top: 100%;
 
   /* Reset styles */
   list-style-type: none;
-
 }
 
 /* The second level sub nested-dropdowns */
 .nested-dropdowns ul ul {
-  left: 130px;
+  left: 170px;
+
   position: absolute;
   top: -15px;
   /* Reset list styles */
@@ -163,33 +168,30 @@ p {
   display: block;
 }
 
-.dropdownlist li{
+.dropdownlist li {
   background-color: lightgray;
   font-size: 14px;
 }
 
-.dropdownlist li:hover{
+.dropdownlist li:hover {
   background-color: darkgrey;
 }
 
 .nested-dropdowns__item {
   min-width: 150px;
-  padding:10px;
+  padding: 10px;
 }
 
-.tilescale{
+.tilescale {
   cursor: pointer;
-    padding:10px;
+  padding: 10px;
 }
 
-.dropdownbutton{
+.dropdownbutton {
   background-color: lightgray;
   z-index: 12;
   padding: 10px;
 }
-
-
-
 
 /* -------------------- */
 

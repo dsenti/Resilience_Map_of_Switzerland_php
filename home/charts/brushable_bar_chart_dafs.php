@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <!-- source: https://gist.github.com/nbremer/326fb6de768e85261bfd47aa1f497863 -->
+
 <head>
   <meta charset="utf-8">
   <title>Brushable bar chart - Horizontal - IV</title>
@@ -107,7 +108,7 @@
         var my_object = {};
         my_object.key = i;
         i++;
-        my_object.tile = key.slice(3,key.length);
+        my_object.tile = key.slice(3, key.length);
         my_object.value = json_data[key];
         data.push(my_object);
       } //for i 
@@ -258,7 +259,7 @@
       /////////////////////////////////////////////////////////////
 
       //What should the first extent of the brush become - a bit arbitrary this
-      var brushExtent = Math.max(1, Math.min(20, Math.round(data.length * 0.1)));
+      var brushExtent = 14;
 
       brush = d3.svg.brush()
         .y(mini_yScale)
@@ -405,7 +406,38 @@
 
       //Reset the part that is visible on the big chart
       var originalRange = main_yZoom.range();
+      //CHANGED ADDED THE IF STATEMENTS and constraining the resize buttons
+      
+      // var ndrag = false;
+      // var sdrag = false;
+      // bar_n.on("mouseover", function(){
+      //   ndrag = true;
+      //   console.log("over");
+      // });
+      // bar_n.on("mouseout", function(){
+      //   ndrag = false;
+      // });
+      
+      if (extent[1] - extent[0] > 100) {
+        extent[1] = extent[0] + 100;
+        brush.extent(extent);
+      } else if (extent[1] - extent[0] < 5) {
+        extent[1] = extent[0] + 5;
+        brush.extent(extent);
+      }
       main_yZoom.domain(extent);
+
+      
+
+      //getting the resize buttons and constraining them:
+      var bar_n = d3.select("g.resize.n");
+      var bar_s = d3.select("g.resize.s");
+      bar_s.attr("transform", "translate(0," + String(extent[1]) + ")");
+      bar_n.attr("transform", "translate(0," + String(extent[0]) + ")");
+
+      //constraining the area in between
+      var extent_element = d3.select("rect.extent");
+      extent_element.attr("height", extent[1] - extent[0]);
 
       /////////////////////////////////////////////////////////////
       ///////////////////// Update the axis ///////////////////////
@@ -415,7 +447,8 @@
       main_yScale.domain(data.map(function(d) {
         return d.tile;
       }));
-      main_yScale.rangeBands([main_yZoom(originalRange[0]), main_yZoom(originalRange[1])], 0.4, 0);
+      //CHANGED: the second to last argument of the rangeBands function will decide the height of the bars
+      main_yScale.rangeBands([main_yZoom(originalRange[0]), main_yZoom(originalRange[1])], 0.1, 0);
 
       //Update the y axis of the big chart
       d3.select(".mainGroup")
@@ -425,11 +458,10 @@
       /////////////////////////////////////////////////////////////
       /////////////// Update the mini bar fills ///////////////////
       /////////////////////////////////////////////////////////////
-
       //Update the colors within the mini bar chart
       var selected = mini_yScale.domain()
         .filter(function(d) {
-          return (extent[0] - mini_yScale.rangeBand() + 1e-2 <= mini_yScale(d)) && (mini_yScale(d) <= extent[1] - 1e-2);
+          return (extent[0] - mini_yScale.rangeBand() + 1e-2 <= mini_yScale(d)) && (mini_yScale(d) <= extent[1] - 1e-2); //returns true for the regions which are visible
         });
       //Update the colors of the mini chart - Make everything outside the brush grey
       d3.select(".miniGroup").selectAll(".bar")
@@ -483,7 +515,6 @@
         y1 = d3.max(range) + mini_yScale.rangeBand(),
         dy = d3.event.deltaY,
         topSection;
-
       if (extent[0] - dy < y0) {
         topSection = y0;
       } else if (extent[1] - dy > y1) {
@@ -509,8 +540,7 @@
     //Create a gradient 
     function createGradient(idName, endPerc) {
 
-      var coloursRainbow = ["#EFB605", "#E9A501", "#E48405", "#E34914", "#DE0D2B", "#CF003E", "#B90050", "#A30F65", "#8E297E", "#724097", "#4F54A8", "#296DA4", "#0C8B8C", "#0DA471", "#39B15E", "#7EB852"];
-      // var coloursRainbow = ['#aaaaaa', "#9d52ad", "#9d52ad", "#9d52ad"];
+      var coloursRainbow = ["#b98fc2", "#9d52ad", "#9d52ad"];
 
       defs.append("linearGradient")
         .attr("id", idName)

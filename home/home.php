@@ -26,8 +26,8 @@
                         Average Farm Size
                     </div>
                     <ul>
-                        <li class = "tilescale"><a onclick="show_cafs()">Cantons</a></li>
-                        <li class = "tilescale"><a onclick="show_dafs();">Districts</a></li>
+                        <li class = "tilescale" onclick="show_cafs();">Cantons</li>
+                        <li class = "tilescale" onclick="show_dafs();">Districts</li>
                     </ul>
                 </li>
                 <li>
@@ -35,8 +35,8 @@
                         Soil Artificialization
                     </div>
                     <ul>
-                        <li class = "tilescale"><a onclick="show_csar()">Cantons</a></li>
-                        <li class = "tilescale"><a onclick="show_dsar();">Districts</a></li>
+                        <li class = "tilescale" onclick="show_csar()">Cantons</li>
+                        <li class = "tilescale" onclick="show_dsar();">Districts</li>
 
                     </ul>
                 </li>

@@ -10,8 +10,8 @@
       <a class="nav-item" id="home_tab" href="/home/home.php">Home</a>
       <a class="nav-item" id="tab_CAFS" href="/cantons_average_farm_size.php">Average Farm Size</a>
       <a class="nav-item" id="tab_artificialization" href="/cantons_soil_artificialization.php">Soil Artificialization</a>
-      <a class="nav-item" id="tab_impermeability" href="/cantons_impermeability.php">Impermeability</a>
       <a class="nav-item" id="tab_biofarms" href="/cantons_organic_farming.php">Organic Farming</a>
+      <a class="nav-item" id="tab_impermeability" href="/cantons_impermeability.php">Impermeability</a>
       <a class="nav-item" id="tab_biofarms" href="/cantons_farmers.php">Farmers</a>
       <a class="nav-item" id="tab_acknowledgements" href="/acknowledgements.php">Acknowledgements</a>
     </div> 
