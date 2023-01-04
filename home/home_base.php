@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <div class="topnav" id = "topnav">
-      <a class="nav-item" id="home_tab" href="/home/home.php">Home</a>
+      <a class="nav-item" id="home_tab" href="/home/home.php">Charts</a>
       <a class="nav-item" id="tab_CAFS" href="/cantons_average_farm_size.php">Average Farm Size</a>
       <a class="nav-item" id="tab_artificialization" href="/cantons_soil_artificialization.php">Soil Artificialization</a>
       <a class="nav-item" id="tab_impermeability" href="/cantons_impermeability.php">Impermeability</a>

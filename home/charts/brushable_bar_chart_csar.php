@@ -22,8 +22,10 @@
       mini_width,
       textScale;
 
-    var colors = ["#EFB605", "#E9A501", "#E48405", "#E34914", "#DE0D2B", "#CF003E", "#B90050", "#A30F65", "#8E297E", "#724097", "#4F54A8", "#296DA4", "#0C8B8C", "#0DA471", "#39B15E", "#7EB852"];
-
+    // var colors = ["#EFB605", "#E9A501", "#E48405", "#E34914", "#DE0D2B", "#CF003E", "#B90050", "#A30F65", "#8E297E", "#724097", "#4F54A8", "#296DA4", "#0C8B8C", "#0DA471", "#39B15E", "#7EB852"];
+    var colors = ["#8494ba","#0033a9","#0033a9"];
+    var min_zoom = 10000;
+    var max_zoom = 38;
   function unique(){
 
       json_data = <?php include("../../data/data_cantons_artificialization.php"); ?>;
@@ -39,16 +41,9 @@
         my_object.tile = key.slice(1,key.length);
         my_object.value = json_data[key];
         data.push(my_object);
-      } //for i 
+      } 
+      
 
-      // //Create the random data
-      // for (var i = 0; i < 40; i++) {
-      //   var my_object = {};
-      //   my_object.key = i;
-      //   my_object.tile = makeWord();
-      //   my_object.value = Math.floor(Math.random() * 600);
-      //   data.push(my_object);
-      // } //for i 
       data.sort(function(a, b) {
         return b.value - a.value;
       });}

@@ -3,7 +3,8 @@
 <?php include("home_base.php") ?>
 
 <head>
-    <h1>Welcome Home</h1>
+    <br>
+    <h1>Charts</h1>
 </head>
 
 
@@ -12,6 +13,12 @@
     <iframe class="chartIframe" id="dafs_chartIframe" src="charts/brushable_bar_chart_dafs.php" title="Chart" frameborder="0" style="display:block;"></iframe>
     <iframe class="chartIframe" id="csar_chartIframe" src="charts/brushable_bar_chart_csar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
     <iframe class="chartIframe" id="dsar_chartIframe" src="charts/brushable_bar_chart_dsar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="cimp_chartIframe" src="charts/brushable_bar_chart_cimp.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="dimp_chartIframe" src="charts/brushable_bar_chart_dimp.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="corf_chartIframe" src="charts/brushable_bar_chart_corf.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="dorf_chartIframe" src="charts/brushable_bar_chart_dorf.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="cfar_chartIframe" src="charts/brushable_bar_chart_cfar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
+    <iframe class="chartIframe" id="dfar_chartIframe" src="charts/brushable_bar_chart_dfar.php" title="Chart" frameborder="0" style="display:block;"></iframe>
 
 
     <!-- https://csslayout.io/nested-dropdowns/ -->
@@ -37,6 +44,36 @@
                     <ul>
                         <li class = "tilescale" onclick="show_csar()">Cantons</li>
                         <li class = "tilescale" onclick="show_dsar();">Districts</li>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="nested-dropdowns__item">
+                        Impermeability
+                    </div>
+                    <ul>
+                        <li class = "tilescale" onclick="show_cimp()">Cantons</li>
+                        <li class = "tilescale" onclick="show_dimp();">Districts</li>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="nested-dropdowns__item">
+                        Organic Farming
+                    </div>
+                    <ul>
+                        <li class = "tilescale" onclick="show_corf()">Cantons</li>
+                        <li class = "tilescale" onclick="show_dorf();">Districts</li>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="nested-dropdowns__item">
+                        Farmers
+                    </div>
+                    <ul>
+                        <li class = "tilescale" onclick="show_cfar()">Cantons</li>
+                        <li class = "tilescale" onclick="show_dfar();">Districts</li>
 
                     </ul>
                 </li>
@@ -78,5 +115,35 @@
     function show_dsar() {
         hide_charts();
         document.getElementById("dsar_chartIframe").style.display = "block";
+    }
+
+    function show_cimp() {
+        hide_charts();
+        document.getElementById("cimp_chartIframe").style.display = "block";
+    }
+
+    function show_dimp() {
+        hide_charts();
+        document.getElementById("dimp_chartIframe").style.display = "block";
+    }
+
+    function show_corf() {
+        hide_charts();
+        document.getElementById("corf_chartIframe").style.display = "block";
+    }
+
+    function show_dorf() {
+        hide_charts();
+        document.getElementById("dorf_chartIframe").style.display = "block";
+    }
+    
+    function show_cfar() {
+        hide_charts();
+        document.getElementById("cfar_chartIframe").style.display = "block";
+    }
+
+    function show_dfar() {
+        hide_charts();
+        document.getElementById("dfar_chartIframe").style.display = "block";
     }
 </script>

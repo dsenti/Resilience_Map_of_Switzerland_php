@@ -1,8 +1,27 @@
 <script>
+
+    class BordersClass {
+        constructor() {
+            this._borders = [];
+        }
+
+        get borders() {
+            return this._borders;
+        }
+
+        set borders(value) {
+            this._borders = value;
+            // console.log("borders updated to: " + value);
+        }
+    }
+
+    var borders = new BordersClass();
     init();
     //CHANGED DATA READ IN TO CORRESPOND TO OWN DATA
     function init() {
         unique();
+
+
 
         /////////////////////////////////////////////////////////////
         ///////////////// Set-up SVG and wrappers ///////////////////
@@ -147,6 +166,8 @@
             .on("brush", brushmove)
         //.on("brushend", brushend);
 
+        borders.borders = [mini_yScale(data[0].tile), mini_yScale(data[brushExtent].tile)];
+
         //Set up the visual part of the brush
         gBrush = d3.select(".brushGroup").append("g")
             .attr("class", "brush")
@@ -282,11 +303,35 @@
     //First function that runs on a brush move
     function brushmove() {
 
-        var extent = brush.extent();
 
+        var extent = brush.extent();
         //Reset the part that is visible on the big chart
         var originalRange = main_yZoom.range();
-        main_yZoom.domain(extent);
+        //CHANGED ADDED THE IF STATEMENTS and constraining the resize buttons
+
+        if ((extent[1] - extent[0] > min_zoom)) {
+            brush.extent(borders.borders);
+            extent = borders.borders;
+        } else if (extent[1] - extent[0] < max_zoom) {
+            brush.extent(borders.borders);
+            extent = borders.borders;
+        } else {
+            borders.borders = extent;
+        }
+        main_yZoom.domain(borders.borders);
+
+
+
+        //getting the resize buttons and constraining them:
+        var bar_n = d3.select("g.resize.n");
+        var bar_s = d3.select("g.resize.s");
+        bar_s.attr("transform", "translate(0," + String(extent[1]) + ")");
+        bar_n.attr("transform", "translate(0," + String(extent[0]) + ")");
+
+        //constraining the area in between
+        var extent_element = d3.select("rect.extent");
+        extent_element.attr("height", extent[1] - extent[0]);
+        extent_element.attr("y", extent[0]);
 
         /////////////////////////////////////////////////////////////
         ///////////////////// Update the axis ///////////////////////
@@ -296,8 +341,7 @@
         main_yScale.domain(data.map(function(d) {
             return d.tile;
         }));
-
-        //CHANGED: the second to last argument of the rangeBands functino will decide the height of the bars
+        //CHANGED: the second to last argument of the rangeBands function will decide the height of the bars
         main_yScale.rangeBands([main_yZoom(originalRange[0]), main_yZoom(originalRange[1])], 0.1, 0);
 
         //Update the y axis of the big chart
@@ -308,11 +352,10 @@
         /////////////////////////////////////////////////////////////
         /////////////// Update the mini bar fills ///////////////////
         /////////////////////////////////////////////////////////////
-
         //Update the colors within the mini bar chart
         var selected = mini_yScale.domain()
             .filter(function(d) {
-                return (extent[0] - mini_yScale.rangeBand() + 1e-2 <= mini_yScale(d)) && (mini_yScale(d) <= extent[1] - 1e-2);
+                return (extent[0] - mini_yScale.rangeBand() + 1e-2 <= mini_yScale(d)) && (mini_yScale(d) <= extent[1] - 1e-2); //returns true for the regions which are visible
             });
         //Update the colors of the mini chart - Make everything outside the brush grey
         d3.select(".miniGroup").selectAll(".bar")
@@ -328,7 +371,6 @@
         update();
 
     } //brushmove
-
     /////////////////////////////////////////////////////////////
     ////////////////////// Click functions //////////////////////
     /////////////////////////////////////////////////////////////
@@ -364,7 +406,7 @@
             range = mini_yScale.range(),
             y0 = d3.min(range),
             y1 = d3.max(range) + mini_yScale.rangeBand(),
-            dy = d3.event.deltaY,
+            dy = -d3.event.deltaY/10,
             topSection;
 
         if (extent[0] - dy < y0) {

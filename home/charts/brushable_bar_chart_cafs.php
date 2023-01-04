@@ -22,6 +22,8 @@
       mini_width,
       textScale;
     var colors = ["#b98fc2", "#9d52ad", "#9d52ad"];
+    var min_zoom = 10000;
+    var max_zoom = 38;
 
 
     function unique() {
@@ -37,16 +39,9 @@
         my_object.tile = key;
         my_object.value = json_data[key];
         data.push(my_object);
-      } //for i 
+      }
 
-      // //Create the random data
-      // for (var i = 0; i < 40; i++) {
-      //   var my_object = {};
-      //   my_object.key = i;
-      //   my_object.tile = makeWord();
-      //   my_object.value = Math.floor(Math.random() * 600);
-      //   data.push(my_object);
-      // } //for i 
+      
       data.sort(function(a, b) {
         return b.value - a.value;
       });
