@@ -1,5 +1,4 @@
 <script>
-
     class BordersClass {
         constructor() {
             this._borders = [];
@@ -11,7 +10,6 @@
 
         set borders(value) {
             this._borders = value;
-            // console.log("borders updated to: " + value);
         }
     }
 
@@ -187,6 +185,7 @@
         gBrush.selectAll("rect")
             .attr("width", mini_width);
 
+
         //On a click recenter the brush window
         gBrush.select(".background")
             .on("mousedown.brush", brushcenter)
@@ -264,7 +263,8 @@
         var bar = d3.select(".mainGroup").selectAll(".bar")
             .data(data, function(d) {
                 return d.key;
-            });
+            })
+            ;
 
         //UPDATE
         bar
@@ -277,6 +277,23 @@
             })
             .attr("height", main_yScale.rangeBand());
 
+        //CHANGED: added a tooltip function on mousehover to the bar elements:
+
+        //creating the tooltip to display
+        var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0)
+            // .style("backdrop-filter", "grayscale(30%) blur(50px) brightness(150%)")
+            // .style("-webkit-backdrop-filter", "grayscale(30%) blur(50px)")
+            // .style("background-color", colors[0])
+            .style("background-color", "white")
+            .style("border-radius", "2px")
+            .style("position", "absolute")
+            .style("padding", "3px")
+            .style("font-family", "'Open Sans', sans-serif")
+            .style("font-size", "10px")
+            .text("test");
+
         //ENTER
         bar.enter().append("rect")
             .attr("class", "bar")
@@ -288,7 +305,19 @@
             .attr("y", function(d, i) {
                 return main_yScale(d.tile);
             })
-            .attr("height", main_yScale.rangeBand());
+            .attr("height", main_yScale.rangeBand())
+            .on('mouseover', function(d) {
+                d3.select(this).attr('opacity', 0.8); // change the opacity of the element
+                tooltip.text(Math.round(d.value * 10) / 10);
+                tooltip.style("opacity", "1");
+                tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            })
+            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+            .on('mouseout', function(d) {
+                d3.select(this).attr('opacity', 1); // change the opacity of the element
+                tooltip.style("opacity", 0);
+            });
+
 
         //EXIT
         bar.exit()
@@ -406,7 +435,7 @@
             range = mini_yScale.range(),
             y0 = d3.min(range),
             y1 = d3.max(range) + mini_yScale.rangeBand(),
-            dy = -d3.event.deltaY/10,
+            dy = -d3.event.deltaY / 10,
             topSection;
 
         if (extent[0] - dy < y0) {

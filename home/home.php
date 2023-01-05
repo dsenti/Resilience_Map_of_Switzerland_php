@@ -28,13 +28,13 @@
                 Indicators
             </div>
             <ul class="dropdownlist">
-                <li>
+                <li id="first_indicator">
                     <div class="nested-dropdowns__item">
                         Average Farm Size
                     </div>
                     <ul>
-                        <li class = "tilescale" onclick="show_cafs();">Cantons</li>
-                        <li class = "tilescale" onclick="show_dafs();">Districts</li>
+                        <li class = "tilescale" id="first_scale_dropdown_item" onclick="show_cafs();">Cantons</li>
+                        <li class = "tilescale" id="last_dropdown_item" onclick="show_dafs();">Districts</li>
                     </ul>
                 </li>
                 <li>
@@ -42,8 +42,8 @@
                         Soil Artificialization
                     </div>
                     <ul>
-                        <li class = "tilescale" onclick="show_csar()">Cantons</li>
-                        <li class = "tilescale" onclick="show_dsar();">Districts</li>
+                        <li class = "tilescale" id="first_dropdown_item" onclick="show_csar()">Cantons</li>
+                        <li class = "tilescale" id="last_dropdown_item" onclick="show_dsar();">Districts</li>
 
                     </ul>
                 </li>
@@ -52,8 +52,8 @@
                         Impermeability
                     </div>
                     <ul>
-                        <li class = "tilescale" onclick="show_cimp()">Cantons</li>
-                        <li class = "tilescale" onclick="show_dimp();">Districts</li>
+                        <li class = "tilescale" id="first_dropdown_item" onclick="show_cimp()">Cantons</li>
+                        <li class = "tilescale" id="last_dropdown_item" onclick="show_dimp();">Districts</li>
 
                     </ul>
                 </li>
@@ -62,18 +62,18 @@
                         Organic Farming
                     </div>
                     <ul>
-                        <li class = "tilescale" onclick="show_corf()">Cantons</li>
-                        <li class = "tilescale" onclick="show_dorf();">Districts</li>
+                        <li class = "tilescale" id="first_dropdown_item" onclick="show_corf()">Cantons</li>
+                        <li class = "tilescale" id="last_dropdown_item" onclick="show_dorf();">Districts</li>
 
                     </ul>
                 </li>
-                <li>
+                <li id="last_indicator">
                     <div class="nested-dropdowns__item">
                         Farmers
                     </div>
                     <ul>
-                        <li class = "tilescale" onclick="show_cfar()">Cantons</li>
-                        <li class = "tilescale" onclick="show_dfar();">Districts</li>
+                        <li class = "tilescale" id="first_dropdown_item" onclick="show_cfar()">Cantons</li>
+                        <li class = "tilescale" id="last_scale_dropdown_item" onclick="show_dfar();">Districts</li>
 
                     </ul>
                 </li>

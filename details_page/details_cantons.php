@@ -22,7 +22,7 @@
                 <div class="bar" id="bar_afs" style="--bar-value:100%;" data-name=""> Error</div>
                 <!-- the two bars which represent the stats bars, mean and median are taken from data analysis, bar-value is calculated by mean/max*100 -->
                 <div class="bar stats" id="bar_afs_mean" style="--bar-value:53.19%;" data-name=""> 22.3 ha (mean)</div>
-                <div class="bar stats" id="bar_afs_median" style="--bar-value:47.38%;" data-name=""> 19.9 ha (median)</div>
+                <!-- <div class="bar stats" id="bar_afs_median" style="--bar-value:47.38%;" data-name=""> 19.9 ha (median)</div> -->
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
             <div class="grid">
                 <div class="bar" id="bar_sar" style="--bar-value:100%;" data-name=""> Error</div>
                 <div class="bar stats" id="bar_sar_mean" style="--bar-value:47.8%;" data-name=""> 0.53% (mean)</div>
-                <div class="bar stats" id="bar_sar_median" style="--bar-value:46.52%;" data-name=""> 0.51% (median)</div>
+                <!-- <div class="bar stats" id="bar_sar_median" style="--bar-value:46.52%;" data-name=""> 0.51% (median)</div> -->
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
             <div class="grid">
                 <div class="bar" id="bar_imp" style="--bar-value:100%;" data-name=""> Error</div>
                 <div class="bar stats" id="bar_imp_mean" style="--bar-value:17.51%;" data-name=""> 8.67% (mean)</div>
-                <div class="bar stats" id="bar_imp_median" style="--bar-value:12.38%;" data-name=""> 6.13% (median)</div>
+                <!-- <div class="bar stats" id="bar_imp_median" style="--bar-value:12.38%;" data-name=""> 6.13% (median)</div> -->
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
             <div class="grid">
                 <div class="bar" id="bar_orf" style="--bar-value:100%;" data-name=""> Error</div>
                 <div class="bar stats" id="bar_orf_mean" style="--bar-value:29.89%;" data-name=""> 19.78% (mean)</div>
-                <div class="bar stats" id="bar_orf_median" style="--bar-value:26.00%;" data-name=""> 17.2% (median)</div>
+                <!-- <div class="bar stats" id="bar_orf_median" style="--bar-value:26.00%;" data-name=""> 17.2% (median)</div> -->
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
             <div class="grid">
                 <div class="bar" id="bar_far" style="--bar-value:100%;" data-name=""> Error</div>
                 <div class="bar stats" id="bar_far_mean" style="--bar-value:36.95%;" data-name=""> 2.24% (mean)</div>
-                <div class="bar stats" id="bar_far_median" style="--bar-value:38.45%;" data-name=""> 2.33% (median)</div>
+                <!-- <div class="bar stats" id="bar_far_median" style="--bar-value:38.45%;" data-name=""> 2.33% (median)</div> -->
             </div>
         </div>
     </div>

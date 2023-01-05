@@ -119,28 +119,41 @@ p {
 /* https://csslayout.io/nested-dropdowns/ */
 /* The sub nested-dropdowns */
 
+/* used to eliminate the list item spacing */
 ul {
   margin: 0;
   padding: 0;
 }
 
+/* the position of the whole dropdown menu and the design of the first button */
 .nested-dropdowns {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
   position: absolute;
   margin-left: 5%;
-  top: 30%;
+  top: 33%;
+  width: 150px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  text-align: center;
   /* Reset list styles */
   list-style-type: none;
 }
 
+.nested-dropdowns:hover{
+  background-color: lightgray;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* the whole list of indicators which drops down  */
 .nested-dropdowns ul {
   /* Hidden by default */
   display: none;
-
   /* Absolute position */
-  /* left: -40px; */
+  left: -2px;
   position: absolute;
   top: 100%;
-
   /* Reset styles */
   list-style-type: none;
 }
@@ -148,13 +161,13 @@ ul {
 /* The second level sub nested-dropdowns */
 .nested-dropdowns ul ul {
   left: 170px;
-
   position: absolute;
   top: -15px;
   /* Reset list styles */
   list-style-type: none;
   z-index: 10;
 }
+
 
 .nested-dropdowns li {
   /* Used to position the sub nested-dropdowns */
@@ -168,30 +181,87 @@ ul {
   display: block;
 }
 
+/* all the dropdown items which come down from the first button */
 .dropdownlist li {
-  background-color: lightgray;
+  color: rgb(73, 73, 73);
+  border-left: 2px solid lightgrey;
+  border-right: 2px solid lightgrey;
+  text-align: center;
   font-size: 14px;
 }
 
 .dropdownlist li:hover {
-  background-color: darkgrey;
+  background-color: lightgrey;
 }
 
+/* all the indicator buttons */
 .nested-dropdowns__item {
   min-width: 150px;
   padding: 10px;
 }
 
+/* all the cantons and districts dropdown buttons */
 .tilescale {
   cursor: pointer;
   padding: 10px;
 }
 
 .dropdownbutton {
-  background-color: lightgray;
   z-index: 12;
   padding: 10px;
 }
+
+
+/* the cantons dropdown button */
+#first_dropdown_item{
+  border-top-right-radius: 5px;
+  border-top: 2px solid lightgrey;
+}
+
+/* the districts dropdown button */
+#last_dropdown_item{
+  border-bottom-right-radius: 5px;
+  border-bottom: 2px solid lightgrey;
+}
+
+/* the first (highest up) cantons dropdown button */
+#first_scale_dropdown_item{
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top: 2px solid lightgrey;
+}
+
+/* the last (lowest down) cantons dropdown button */
+#last_scale_dropdown_item{
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom: 2px solid lightgrey;
+}
+
+/* the first (highest) indicator  */
+#first_indicator{
+  border-top-right-radius: 5px;
+  border-top: 2px solid lightgrey;
+}
+
+#first_indicator:hover{
+  background-color: lightgrey;
+  border-top-right-radius: 0px;
+}
+
+/* the last (lowest indicator) */
+#last_indicator{
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom: 2px solid lightgrey;
+}
+
+#last_indicator:hover{
+  background-color: lightgrey;
+  border-bottom-right-radius: 0px;
+}
+
+
 
 /* -------------------- */
 
@@ -260,8 +330,8 @@ ul {
   color: rgb(204, 204, 204);
   height: 72%;
   background-color: #ffffff99;
-  backdrop-filter: blur(23px) brightness(100%) saturate(80%);
-  -webkit-backdrop-filter: blur(23px) brightness(100%) saturate(80%);
+  backdrop-filter: blur(23px) brightness(95%) saturate(80%);
+  -webkit-backdrop-filter: blur(23px) brightness(95%) saturate(80%);
   border-radius: 16px;
   /* visibility : "hidden"; */
 }
