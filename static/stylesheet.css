@@ -28,6 +28,10 @@ iframebody {
   margin: 0;
   padding: 0;
   z-index: -3;
+  display: inline;
+  grid-template-columns: repeat(3, 3fr);
+  grid-column-gap: 20px; /* space between columns, change as needed */
+  grid-row-gap: 20px; /* space between rows, change as needed */
 }
 
 h1 {
@@ -127,7 +131,7 @@ ul {
 
 /* the position of the whole dropdown menu and the design of the first button */
 .nested-dropdowns {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   position: absolute;
   margin-left: 5%;
@@ -140,7 +144,7 @@ ul {
   list-style-type: none;
 }
 
-.nested-dropdowns:hover{
+.nested-dropdowns:hover {
   background-color: lightgray;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -167,7 +171,6 @@ ul {
   list-style-type: none;
   z-index: 10;
 }
-
 
 .nested-dropdowns li {
   /* Used to position the sub nested-dropdowns */
@@ -211,57 +214,54 @@ ul {
   padding: 10px;
 }
 
-
 /* the cantons dropdown button */
-#first_dropdown_item{
+#first_dropdown_item {
   border-top-right-radius: 5px;
   border-top: 2px solid lightgrey;
 }
 
 /* the districts dropdown button */
-#last_dropdown_item{
+#last_dropdown_item {
   border-bottom-right-radius: 5px;
   border-bottom: 2px solid lightgrey;
 }
 
 /* the first (highest up) cantons dropdown button */
-#first_scale_dropdown_item{
+#first_scale_dropdown_item {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   border-top: 2px solid lightgrey;
 }
 
 /* the last (lowest down) cantons dropdown button */
-#last_scale_dropdown_item{
+#last_scale_dropdown_item {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border-bottom: 2px solid lightgrey;
 }
 
 /* the first (highest) indicator  */
-#first_indicator{
+#first_indicator {
   border-top-right-radius: 5px;
   border-top: 2px solid lightgrey;
 }
 
-#first_indicator:hover{
+#first_indicator:hover {
   background-color: lightgrey;
   border-top-right-radius: 0px;
 }
 
 /* the last (lowest indicator) */
-#last_indicator{
+#last_indicator {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border-bottom: 2px solid lightgrey;
 }
 
-#last_indicator:hover{
+#last_indicator:hover {
   background-color: lightgrey;
   border-bottom-right-radius: 0px;
 }
-
-
 
 /* -------------------- */
 
@@ -330,8 +330,8 @@ ul {
   color: rgb(204, 204, 204);
   height: 72%;
   background-color: #ffffff99;
-  backdrop-filter: blur(23px) brightness(95%) saturate(80%);
-  -webkit-backdrop-filter: blur(23px) brightness(95%) saturate(80%);
+  backdrop-filter: blur(23px) brightness(90%) saturate(80%);
+  -webkit-backdrop-filter: blur(23px) brightness(90%) saturate(80%);
   border-radius: 16px;
   /* visibility : "hidden"; */
 }
@@ -345,7 +345,7 @@ ul {
   border-style: hidden;
   text-align: center;
   cursor: pointer;
-  margin-top: 0px;
+  margin-top: 50px;
   margin-left: 45%;
   padding-left: 7px;
   padding-right: 7px;
@@ -354,9 +354,29 @@ ul {
 }
 
 #iframebackbutton:hover {
-  background-color: rgb(54, 54, 54);
+  background-color: rgb(0, 0, 0);
   color: white;
   border-radius: 10%;
+}
+
+.detailsicon {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+}
+.detailsicon:hover {
+  -webkit-filter: invert();
+  filter: invert();
+  cursor: pointer;
+  background-color: white;
+}
+
+.expand {
+  position: absolute;
+  margin-left: 85%;
+  margin-right: 3%;
 }
 
 detailsTitle {
@@ -366,6 +386,7 @@ detailsTitle {
   color: black;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 #detailsButton {

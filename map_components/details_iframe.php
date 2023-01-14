@@ -36,7 +36,14 @@
 
     //this function closes the details window
     function hideDetails() {
+        var iframebody = $(".iframebody");
         var iframe = $("#detailsIframe");
         iframe.fadeOut((speed = "fast"));
+        iframe.promise().done(function() {
+            // will be called when all the animations on the queue finish
+            iframe.css('width', "35%");
+            iframe.css('margin-left', "59%");
+            iframebody.css('display', "inline")
+        });
     }
 </script>

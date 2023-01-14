@@ -5,13 +5,14 @@
 
 
 <head>
+    <img src="../static/back.png" alt="expand" class="detailsicon" onclick="window.parent.hideDetails()">
+    <img src="../static/expand.png" alt="expand" class="detailsicon expand" onclick="expand()">
     <detailsTitle id="detailstitle"> Title </detailsTitle>
 </head>
 
 
 
 <iframebody id="iframebody">
-    <br>
     <!-- title of the bar chart -->
     <div class="chart vertical">
         <div class="charttitle">Average Farm Size</div>
@@ -26,7 +27,6 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="chart vertical" id="sar_chart">
         <div class="charttitle">Rate of Soil Artificialization:</div>
         <div class="charttext">This indicator calculates how much of the total area of the region has seen a change from natural habitats to some kind of artificial soil use between 2009 and 2018.</div>
@@ -38,10 +38,9 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="chart vertical" id="imp_chart">
         <div class="charttitle">Percentage of Artificially Impermeable Area</div>
-        <div class="charttext">This indicator calculates the area which has been rendered artificially impermeable (not allowing water to pass through) as a percentage of the total area of the region. 
+        <div class="charttext">This indicator calculates the area which has been rendered artificially impermeable (not allowing water to pass through) as a percentage of the total area of the region.
             This includes buildings, roads etc but doesn't include naturally impermeable surfaces such as rock.</div>
         <div class="imp_chart">
             <div class="grid">
@@ -51,7 +50,6 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="chart vertical" id="orf_chart">
         <div class="charttitle">Percentage of Organic Farming</div>
         <div class="charttext">This indicator calculates the percentage of farmland which is used as organic farming.</div>
@@ -63,7 +61,6 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="chart vertical" id="far_chart">
         <div class="charttitle">Percentage of Population Active in Agriculture:</div>
         <div class="charttext">This indicator calculates the percentage of the population of the region, which works in the agricultural sector.</div>
@@ -75,7 +72,6 @@
             </div>
         </div>
     </div>
-    <br><br><br>
 
 </iframebody>
 
@@ -219,4 +215,37 @@
         bar.addEventListener('mouseover', hoverfunction)
         bar.addEventListener('mouseout', endhoverfunction)
     })
+    
+    function expand() {
+        var frame = window.parent.document.getElementById('detailsIframe');
+        frame.style.width = "93%";
+        frame.style.marginLeft = "1%";
+        frame.style.height = "77%"
+        var iframebody = document.getElementById('iframebody');
+        iframebody.style.display = "inline-grid";
+        var expandbutton = document.getElementsByClassName('expand');
+        expandbutton[0].style.marginLeft = "94.4%";
+        expandbutton[0].src = "../static/minimize.png";
+        expandbutton[0].setAttribute("onclick", "minimize()")
+        // document.getElementById("imageid").src="../template/save.png";
+    }
+
+    function minimize() {
+        var frame = window.parent.document.getElementById('detailsIframe');
+        frame.style.width = "35%";
+        frame.style.height = "72%"
+        frame.style.marginLeft = "59%";
+        var iframebody = document.getElementById('iframebody');
+        iframebody.style.display = "inline";
+        var expandbutton = document.getElementsByClassName('expand');
+        expandbutton[0].style.marginLeft = "85%";
+        expandbutton[0].src = "../static/expand.png";
+        expandbutton[0].setAttribute("onclick", "expand()")
+    }
+
+    window.onkeydown = function(event) {
+        if (event.keyCode == 27) {
+            window.parent.hideDetails();
+        }
+    };
 </script>
